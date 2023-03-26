@@ -1,31 +1,24 @@
 <?php
 return [
-    // [
-    //     'name'  => 'Quản lý menu',
-    //     'list-check' => ['menu'],
-    //     'namespace' => 'menu',
-    //     'route' => 'admin.menu.index',
-    //     'icon'  => 'fa fa-fw fa-list',
-    //     'roles' =>  [1,2]
-    // ],
-    // [
-    //     'name' => 'Sản phẩm',
-    //     'list-check' => ['category', 'producer', 'type', 'attribute', 'keyword', 'product', 'discount-code'],
-    //     'icon' => 'fa fa-database',
-    //     'roles' =>  [1,2],
-    //     'sub'  => [
-            // [
-            //     'name'  => 'Danh Mục',
-            //     'namespace' => 'category',
-            //     'route' => 'admin.category.index',
-            //     'icon'  => 'fa fa-edit'
-            // ],
-            // [
-            //     'name'  => 'Nhà sản xuất',
-            //     'namespace' => 'producer',
-            //     'route' => 'admin.producer.index',
-            //     'icon'  => 'fa fa-truck'
-            // ],
+
+    [
+        'name' => 'Sản phẩm',
+        'list-check' => ['category', 'producer', 'type', 'attribute', 'keyword', 'product', 'discount-code'],
+        'icon' => 'fa fa-database',
+        'roles' =>  [1,2],
+        'sub'  => [
+            [
+                'name'  => 'Danh Mục',
+                'namespace' => 'category',
+                'route' => 'admin.category.index',
+                'icon'  => 'fa fa-edit'
+            ],
+            [
+                'name'  => 'Nhà sản xuất',
+                'namespace' => 'producer',
+                'route' => 'admin.producer.index',
+                'icon'  => 'fa fa-truck'
+            ],
 //            [
 //                'name'  => 'Kiểu dữ liệu',
 //                'namespace' => 'type',
@@ -38,40 +31,12 @@ return [
 //                'route' => 'admin.attribute.index',
 //                'icon'  => 'fa fa-key'
 //            ],
-        //     [
-        //         'name'  => 'Keyword',
-        //         'namespace' => 'keyword',
-        //         'route' => 'admin.keyword.index',
-        //         'icon'  => 'fa fa-key'
-        //     ],
-        //     [
-        //         'name'  => 'Sản phẩm',
-        //         'namespace' => 'product',
-        //         'route' => 'admin.product.index',
-        //         'icon'  => 'fa fa-database'
-        //     ],
-        //     [
-        //         'name'  => 'Mã giảm giá',
-        //         'namespace' => 'discount-code',
-        //         'route' => 'admin.discount.code.index',
-        //         'icon'  => 'fa fa-fw fa-arrow-circle-down'
-        //     ],
-        // ]
-    // ],
-    // [
-    //     'name' => 'Bài viết',
-    //     'list-check' => ['article'],
-    //     'icon' => 'fa fa-edit',
-    //     'sub'  => [
-    //         [
-    //             'name'  => 'Bài viết',
-    //             'namespace' => 'article',
-    //             'route' => 'admin.article.index',
-    //             'icon'  => 'fa fa-key'
-    //         ],
-    //     ],
-    //     'roles' =>  [1,2]
-    // ],
+
+
+
+        ]
+    ],
+    
     [
         'name' => 'Tài khoản',
         'list-check' => ['user','rating','comment','contact'],
@@ -84,49 +49,7 @@ return [
                 'namespace' => 'admin',
                 'icon'  => 'fa fa-user'
             ],
-            // [
-            //     'name'  => 'Người dùng',
-            //     'route' => 'admin.user.index',
-            //     'namespace' => 'user',
-            //     'icon'  => 'fa fa-user'
-            // ],
-            // [
-            //     'name'  => 'Đánh giá',
-            //     'namespace' => 'rating',
-            //     'route' => 'admin.rating.index',
-            //     'icon'  => 'fa fa-star'
-            // ],
-            // [
-            //     'name'  => 'Bình luận',
-            //     'namespace' => 'comment',
-            //     'route' => 'admin.comment.index',
-            //     'icon'  => 'fa fa-star'
-            // ],
-            // [
-            //     'name'  => 'Liên hệ',
-            //     'namespace' => 'contact',
-            //     'route' => 'admin.contact',
-            //     'icon'  => 'fa fa-star'
-            // ],
+           
         ]
-    ],
-    // [
-    //     'name' => 'Giao dịch',
-    //     'list-check' => ['transaction'],
-    //     'icon' => 'fa-shopping-cart',
-    //     'sub'  => [
-    //         [
-    //             'name'  => 'Danh sách',
-    //             'namespace' => 'transaction',
-    //             'route' => 'admin.transaction.index',
-    //             'icon'  => 'fa-opencart'
-    //         ]
-    //     ],
-    //     'roles' =>  [1,2]
-    // ],
-    // [
-    //     'name'  => 'System',
-    //     'label' => 'true',
-    //     'roles' =>  [1,2]
-    // ]
+    ]
 ];
