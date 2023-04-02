@@ -1,6 +1,13 @@
 <?php
 return [
-
+    [
+        'name'  => 'Quản lý menu',
+        'list-check' => ['menu'],
+        'namespace' => 'menu',
+        'route' => 'admin.menu.index',
+        'icon'  => 'fa fa-fw fa-list',
+        'roles' =>  [1,2]
+    ],
     [
         'name' => 'Sản phẩm',
         'list-check' => ['category', 'producer', 'type', 'attribute', 'keyword', 'product', 'discount-code'],
@@ -32,8 +39,19 @@ return [
 //                'icon'  => 'fa fa-key'
 //            ],
 
-
-
+            [
+                'name'  => 'Keyword',
+                'namespace' => 'keyword',
+                'route' => 'admin.keyword.index',
+                'icon'  => 'fa fa-key'
+            ],
+            [
+                'name'  => 'Sản phẩm',
+                'namespace' => 'product',
+                'route' => 'admin.product.index',
+                'icon'  => 'fa fa-database'
+            ],
+           
         ]
     ],
     
