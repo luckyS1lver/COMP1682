@@ -51,10 +51,23 @@ return [
                 'route' => 'admin.product.index',
                 'icon'  => 'fa fa-database'
             ],
-           
+
         ]
     ],
-    
+    [
+        'name' => 'Bài viết',
+        'list-check' => ['article'],
+        'icon' => 'fa fa-edit',
+        'sub'  => [
+            [
+                'name'  => 'Bài viết',
+                'namespace' => 'article',
+                'route' => 'admin.article.index',
+                'icon'  => 'fa fa-key'
+            ],
+        ],
+        'roles' =>  [1,2]
+    ],
     [
         'name' => 'Tài khoản',
         'list-check' => ['user','rating','comment','contact'],
@@ -67,7 +80,12 @@ return [
                 'namespace' => 'admin',
                 'icon'  => 'fa fa-user'
             ],
-           
+            [
+                'name'  => 'Bình luận',
+                'namespace' => 'comment',
+                'route' => 'admin.comment.index',
+                'icon'  => 'fa fa-star'
+            ],
         ]
     ]
 ];
