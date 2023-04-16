@@ -51,6 +51,12 @@ return [
                 'route' => 'admin.product.index',
                 'icon'  => 'fa fa-database'
             ],
+			[
+                'name'  => 'Mã giảm giá',
+                'namespace' => 'discount-code',
+                'route' => 'admin.discount.code.index',
+                'icon'  => 'fa fa-fw fa-arrow-circle-down'
+            ],
 
         ]
     ],
@@ -98,6 +104,13 @@ return [
                 'route' => 'admin.comment.index',
                 'icon'  => 'fa fa-star'
             ],
+			[
+                'name'  => 'Liên hệ',
+                'namespace' => 'contact',
+                'route' => 'admin.contact',
+                'icon'  => 'fa fa-star'
+            ],
         ]
-    ]
+    ],
+	
 ];
