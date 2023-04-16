@@ -13,7 +13,6 @@ class AdminStatisticalController extends Controller
 {
     public function index(Request $request)
     {
-        
         //Tổng hđơn hàng
         $totalTransactions = \DB::table('transactions')->select('id')->count();
 
@@ -163,8 +162,6 @@ class AdminStatisticalController extends Controller
             }
             $arrRevenueTransactionMonthTransport[] = (int)$total;
         }
-
-
 
         $viewData = [
             'totalTransactions'          => $totalTransactions,

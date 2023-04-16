@@ -25,7 +25,6 @@
             <div class="box-body">
                 <ul>
                     <li>Họ Tên: {{ $admin->name }}</li>
-                    <li>Lớp : {{ $admin->class }}</li>
                     <li>Số điện thoại : {{ $admin->phone }}</li>
                     <li>Email : {{ $admin->email }}</li>
                 </ul>

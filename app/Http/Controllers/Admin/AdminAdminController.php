@@ -49,7 +49,7 @@ class AdminAdminController extends Controller
      */
     public function store(AdminRequest $request)
     {
-        
+
         //
         \DB::beginTransaction();
         try {
@@ -64,7 +64,7 @@ class AdminAdminController extends Controller
                 $data['password'] = Hash::make($request->password);
             }
             Admin::insert($data);
-           \DB::commit();
+            \DB::commit();
             return redirect()->route('admin.index')->with('success', 'Thêm mới thành công');
         } catch (\Exception $exception) {
             \DB::rollBack();

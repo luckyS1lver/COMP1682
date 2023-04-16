@@ -21,7 +21,7 @@
     <div class="form-group">
         <label for="inputName" class="col-sm-2 control-label">Phone <sup class="text-danger">(*)</sup></label>
         <div class="col-sm-10">
-            <input type="text" class="form-control" name="phone" placeholder="Phone" value="{{ old('phone', isset($admin->phone) ? $admin->phone : '') }}" required>
+            <input type="text" class="form-control" name="phone" placeholder="Name" value="{{ old('phone', isset($admin->phone) ? $admin->phone : '') }}" required>
             @if ($errors->first('phone'))
                 <span class="text-danger">{{ $errors->first('phone') }}</span>
             @endif
@@ -34,15 +34,15 @@
         </div>
     </div>
     <div class="form-group">
-    <label for="inputName" class="col-sm-2 control-label">Mật khẩu @if (!isset($admin)) <sup class="text-danger">(*)</sup> @else (Nhập mật khẩu để thực hiện update) @endif</label>
+        <label for="inputName" class="col-sm-2 control-label">Mật khẩu @if (!isset($admin)) <sup class="text-danger">(*)</sup> @else (Nhập mật khẩu để thực hiện update) @endif</label>
         <div class="col-sm-10">
             <input type="password" class="form-control" name="password" placeholder="Mật khẩu">
             @if ($errors->first('phone'))
-                <span class="text-danger">{{ $errors->first('password') }}</span>
+                <span class="text-danger">{{ $errors->first('phone') }}</span>
             @endif
         </div>
     </div>
-    <!-- <div class="form-group {{ $errors->first('role') ? 'has-error' : '' }}">
+    <div class="form-group {{ $errors->first('role') ? 'has-error' : '' }}">
         <label class="control-label col-sm-2">Chọn Vai Trò <sup class="text-danger">(*)</sup></label>
         <div class="col-sm-10">
             <select name="role" class="form-control ">
@@ -56,7 +56,7 @@
                 <span class="text-danger">{{ $errors->first('role') }}</span>
             @endif
         </div>
-    </div> -->
+    </div>
     <div class="form-group">
         <label for="inputName" class="col-sm-2 control-label">Ảnh đại diện</label>
         <div class="col-sm-10">
@@ -65,7 +65,7 @@
     </div>
     <div class="form-group">
         <div class="col-sm-offset-2 col-sm-10">
-            <button type="submit" value="{{ isset($admin) ? 'update' : 'create' }}" name="submit" class="btn btn-danger">Lưu dữ liệu</button>
+            <button type="submit" class="btn btn-danger" name="submit" value="{{ isset($admin) ? 'update' : 'create' }}">Lưu dữ liệu</button>
         </div>
     </div>
 </form>

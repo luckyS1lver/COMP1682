@@ -38,7 +38,6 @@ return [
 //                'route' => 'admin.attribute.index',
 //                'icon'  => 'fa fa-key'
 //            ],
-
             [
                 'name'  => 'Keyword',
                 'namespace' => 'keyword',
@@ -51,13 +50,12 @@ return [
                 'route' => 'admin.product.index',
                 'icon'  => 'fa fa-database'
             ],
-			[
+            [
                 'name'  => 'Mã giảm giá',
                 'namespace' => 'discount-code',
                 'route' => 'admin.discount.code.index',
                 'icon'  => 'fa fa-fw fa-arrow-circle-down'
             ],
-
         ]
     ],
     [
@@ -104,7 +102,7 @@ return [
                 'route' => 'admin.comment.index',
                 'icon'  => 'fa fa-star'
             ],
-			[
+            [
                 'name'  => 'Liên hệ',
                 'namespace' => 'contact',
                 'route' => 'admin.contact',
@@ -112,5 +110,23 @@ return [
             ],
         ]
     ],
-	
+    [
+        'name' => 'Giao dịch',
+        'list-check' => ['transaction'],
+        'icon' => 'fa-shopping-cart',
+        'sub'  => [
+            [
+                'name'  => 'Danh sách',
+                'namespace' => 'transaction',
+                'route' => 'admin.transaction.index',
+                'icon'  => 'fa-opencart'
+            ]
+        ],
+        'roles' =>  [1,2]
+    ],
+    [
+        'name'  => 'System',
+        'label' => 'true',
+        'roles' =>  [1,2]
+    ]
 ];

@@ -16,9 +16,9 @@
             <div class="box-header with-border">
                 <div class="box-header">
                     <h3 class="box-title"><a href="{{ route('admin.create') }}" class="btn btn-primary">Thêm mới <i class="fa fa-plus"></i></a></h3>
-               </div>
+                </div>
                 <div class="box-body">
-                   <div class="col-md-12">
+                    <div class="col-md-12">
                         <table class="table">
                             <tbody>
                                 <tr>

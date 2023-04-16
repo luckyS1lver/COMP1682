@@ -117,7 +117,6 @@
                         </li>
 
                         @foreach(config('sidebar') as $item)
-                           
                             @if (isset($item['label']))
                                 <li class="header">{{ $item['name'] }}</li>
                                 @continue;
@@ -146,12 +145,11 @@
                                     </ul>
                                 @endif
                             </li>
-                           
                         @endforeach
-                        <!-- <li><a href="{{  route('admin.slide.index') }}"><i class="fa fa-circle-o text-red"></i> <span>Slide</span></a></li>
+                        <li><a href="{{  route('admin.slide.index') }}"><i class="fa fa-circle-o text-red"></i> <span>Slide</span></a></li>
                         <li><a href="{{  route('admin.event.index') }}"><i class="fa fa-circle-o text-red"></i> <span>Sự kiện</span></a></li>
                         <li><a href="{{  route('admin.static.index') }}"><i class="fa fa-circle-o text-red"></i> <span>Trang tĩnh</span></a></li>
-                        <li><a href="{{  route('get.admin.info') }}"><i class="fa fa-circle-o text-red"></i> <span>Thông tin Admin</span></a></li> -->
+                        <li><a href="{{  route('get.admin.info') }}"><i class="fa fa-circle-o text-red"></i> <span>Thông tin Admin</span></a></li>
                     </ul>
                 </section>
                 <!-- /.sidebar -->

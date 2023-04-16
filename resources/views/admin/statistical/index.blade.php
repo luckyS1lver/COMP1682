@@ -7,7 +7,323 @@
             <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
         </ol>
     </section>
-    
+    <section class="content">
+        <!-- Info boxes -->
+        <div class="row">
+            <div class="col-md-3 col-sm-6 col-xs-12">
+                <div class="info-box">
+                    <span class="info-box-icon bg-aqua"><i class="ion ion-ios-cart-outline"></i></span>
+                    <div class="info-box-content">
+                        <span class="info-box-text">Tổng số đơn hàng</span>
+                        <span class="info-box-number">{{  $totalTransactions }}<small><a href="{{  route('admin.transaction.index') }}">(Chi tiết)</a></small></span>
+                    </div>
+                    <!-- /.info-box-content -->
+                </div>
+                <!-- /.info-box -->
+            </div>
+            <!-- /.col -->
+            <div class="col-md-3 col-sm-6 col-xs-12">
+                <div class="info-box">
+                    <span class="info-box-icon bg-red"><i class="ion ion-ios-people-outline"></i></span>
+                    <div class="info-box-content">
+                        <span class="info-box-text">Thành viên</span>
+                        <span class="info-box-number">{{ $totalUsers }} <small><a href="{{ route('admin.user.index') }}">(Chi tiết)</a></small></span>
+                    </div>
+                    <!-- /.info-box-content -->
+                </div>
+                <!-- /.info-box -->
+            </div>
+            <!-- /.col -->
+            <!-- fix for small devices only -->
+            <div class="clearfix visible-sm-block"></div>
+            <div class="col-md-3 col-sm-6 col-xs-12">
+                <div class="info-box">
+                    <span class="info-box-icon bg-green"><i class="ion ion-ios-gear-outline"></i></span>
+                    <div class="info-box-content">
+                        <span class="info-box-text">Sản phẩm</span>
+                        <span class="info-box-number">{{  $totalProducts }} <small><a href="{{ route('admin.product.index') }}">(Chi tiết)</a></small></span>
+                    </div>
+                    <!-- /.info-box-content -->
+                </div>
+                <!-- /.info-box -->
+            </div>
+            <!-- /.col -->
+            <div class="col-md-3 col-sm-6 col-xs-12">
+                <div class="info-box">
+                    <span class="info-box-icon bg-yellow"><i class="fa fa-google-plus"></i></span>
+                    <div class="info-box-content">
+                        <span class="info-box-text">Đánh giá</span>
+                        <span class="info-box-number">{{ $totalRatings }} <small><a href="{{ route('admin.rating.index') }}">(Chi tiết)</a></small></span>
+                    </div>
+                    <!-- /.info-box-content -->
+                </div>
+                <!-- /.info-box -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <div class="row">
+            <!-- /.col -->
+            <div class="col-md-3 col-sm-6 col-xs-12">
+                <div class="info-box">
+                    <span class="info-box-icon bg-aqua"><i class="fa fa-fw fa-usd"></i></span>
+                    <div class="info-box-content">
+                        <span class="info-box-text">Doanh thu ngày</span>
+                        <span class="info-box-number">{{ number_format($totalMoneyDay,0,',','.') }} <small></small></span>
+                    </div>
+                    <!-- /.info-box-content -->
+                </div>
+                <!-- /.info-box -->
+            </div>
+            <!-- /.col -->
+            <div class="col-md-3 col-sm-6 col-xs-12">
+                <div class="info-box">
+                    <span class="info-box-icon bg-green"><i class="fa fa-fw fa-usd"></i></span>
+                    <div class="info-box-content">
+                        <span class="info-box-text">Doanh thu tuần</span>
+                        <span class="info-box-number">{{ number_format($totalMoneyWeed ,0,',','.') }}<small></small></span>
+                    </div>
+                    <!-- /.info-box-content -->
+                </div>
+                <!-- /.info-box -->
+            </div>
+            <!-- /.col -->
+            <div class="col-md-3 col-sm-6 col-xs-12">
+                <div class="info-box">
+                    <span class="info-box-icon bg-red"><i class="fa fa-fw fa-usd"></i></span>
+                    <div class="info-box-content">
+                        <span class="info-box-text">Doanh thu tháng</span>
+                        <span class="info-box-number">{{number_format($totalMoneyMonth,0,',','.')  }} <small></small></span>
+                    </div>
+                    <!-- /.info-box-content -->
+                </div>
+                <!-- /.info-box -->
+            </div>
+            <!-- /.col -->
+            <!-- fix for small devices only -->
+            <div class="clearfix visible-sm-block"></div>
+            <div class="col-md-3 col-sm-6 col-xs-12">
+                <div class="info-box">
+                    <span class="info-box-icon bg-maroon"><i class="fa fa-fw fa-usd"></i></span>
+                    <div class="info-box-content">
+                        <span class="info-box-text">Doanh thu năm</span>
+                        <span class="info-box-number">{{ number_format($totalMoneyYear ,0,',','.') }} <small></small></span>
+                    </div>
+                    <!-- /.info-box-content -->
+                </div>
+                <!-- /.info-box -->
+            </div>
+
+        </div>
+        <!-- /.row -->
+        <div class="row" style="margin-bottom: 15px;">
+            <div class="col-md-12">
+                <form action="">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-4">
+                            <?php $month = date('m'); ?>
+                            <div class="form-group">
+                                <select name="select_month" id="" class="form-control">
+                                    <option value="">Chọn tháng</option>
+                                    @for($i = 1; $i < 13; $i++)
+                                        @if(Request::get('select_month'))
+                                            <option {{ Request::get('select_month') == $i ? "selected='selected'" : '' }} value="{{$i}}">{{$i}}</option>
+                                        @else
+                                            <option {{ $month == $i ? "selected='selected'" : '' }} value="{{$i}}">{{$i}}</option>
+                                        @endif
+                                    @endfor
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-4">
+                            <?php $year = date('Y'); ?>
+                            <div class="form-group">
+                                <select name="select_year" id="" class="form-control">
+                                    <option value="">Chọn năm</option>
+                                    @for($i = $year - 15; $i <= $year + 5; $i++)
+                                        @if(Request::get('select_year'))
+                                            <option {{ Request::get('select_year') == $i ? "selected='selected'" : '' }} value="{{$i}}">{{$i}}</option>
+                                        @else
+                                            <option {{ $year == $i ? "selected='selected'" : '' }} value="{{$i}}">{{$i}}</option>
+                                        @endif
+                                    @endfor
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-3">
+                            <div class="input-group-append">
+                                <button type="submit" class="btn btn-success " style="margin-right: 10px"><i class="fa fa-fw fa-search"></i> Lọc dữ liệu </button>
+                            </div>
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+            <div class="col-sm-8">
+                <figure class="highcharts-figure">
+                    <div id="container2"
+                         data-list-day="{{ $listDay }}"
+                         data-money-default={{ $arrRevenueTransactionMonthDefault }}
+                                 data-money={{ $arrRevenueTransactionMonth }}
+                                 data-money-cancel={{ $arrRevenueTransactionMonthCancel }}
+                                 data-money-transport={{ $arrRevenueTransactionMonthTransport }}
+                    >
+
+                    </div>
+                </figure>
+            </div>
+            <div class="col-sm-4">
+                <figure class="highcharts-figure">
+                    <div id="container" data-json="{{ $statusTransaction }}"></div>
+                </figure>
+            </div>
+        </div>
+        <!-- Main row -->
+        <div class="row">
+            <!-- Left col -->
+            <div class="col-md-8">
+                <!-- TABLE: LATEST ORDERS -->
+                <div class="box box-info">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Danh sách đơn hàng mới</h3>
+                        <div class="box-tools pull-right">
+                            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                            </button>
+                            <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                        </div>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                        <div class="table-responsive">
+                            <table class="table no-margin">
+                                <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Thông tin</th>
+                                    <th>Tổng tiền</th>
+                                    <th>Account</th>
+                                    <th>Trạng thái</th>
+                                    <th>Ngày tạo</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @foreach($transactions as $transaction)
+                                    <tr>
+                                        <td>{{ $transaction->id }}</td>
+                                        <td>
+                                            <ul>
+                                                <li>Name: {{ $transaction->tst_name }}</li>
+                                                <li>Email: {{ $transaction->tst_email }}</li>
+                                                <li>Phone: {{ $transaction->tst_phone }}</li>
+                                            </ul>
+                                        </td>
+                                        <td>{{ number_format($transaction->tst_total_money,0,',','.') }} đ</td>
+                                        <td>
+                                            @if ($transaction->tst_user_id)
+                                                <span class="label label-success">Thành viên</span>
+                                            @else
+                                                <span class="label label-default">Khách</span>
+                                            @endif
+                                        </td>
+                                        <td>
+                                            <span class="label label-{{ $transaction->getStatus($transaction->tst_status)['class'] }}">
+                                                {{ $transaction->getStatus($transaction->tst_status)['name'] }}
+                                            </span>
+                                        </td>
+                                        <td>{{  $transaction->created_at }}</td>
+                                    </tr>
+                                @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- /.table-responsive -->
+                    </div>
+                    <!-- /.box-body -->
+                    <div class="box-footer clearfix">
+                        <a href="{{ route('admin.transaction.index') }}" class="btn btn-sm btn-info btn-flat pull-right">Danh sách đơn hàng</a>
+                    </div>
+                    <!-- /.box-footer -->
+                </div>
+                <!-- /.box -->
+            </div>
+            <!-- /.col -->
+            <div class="col-md-4">
+                <!-- PRODUCT LIST -->
+                <div class="box box-primary">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Top sản phẩm bán chạy</h3>
+                        <div class="box-tools pull-right">
+                            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                            </button>
+                            <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                        </div>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                        <ul class="products-list product-list-in-box">
+                            @foreach($topPayProducts as $item)
+                                <li class="item">
+                                    <div class="product-img">
+                                        <img src="{{ pare_url_file($item->pro_avatar) }}" alt="Product Image">
+                                    </div>
+                                    <div class="product-info">
+                                        <a href="javascript:void(0)" class="product-title">
+                                            {{  $item->pro_pay }} Lượt mua
+                                            <span class="label label-warning pull-right">{{ number_format($item->pro_price,0,',','.') }} đ</span>
+                                        </a>
+                                        <span class="product-description">{{ $item->pro_name }}</span>
+                                    </div>
+                                </li>
+                            @endforeach
+                        </ul>
+                    </div>
+                    <!-- /.box-body -->
+                    <div class="box-footer text-center">
+                        {{--<a href="javascript:void(0)" class="uppercase">View All Products</a>--}}
+                    </div>
+                    <!-- /.box-footer -->
+                </div>
+                <!-- /.box -->
+                <!-- PRODUCT LIST -->
+                <div class="box box-primary">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Top sản phẩm xem nhiều</h3>
+                        <div class="box-tools pull-right">
+                            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                            </button>
+                            <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                        </div>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                        <ul class="products-list product-list-in-box">
+                            @foreach($topViewProducts as $item)
+                                <li class="item">
+                                    <div class="product-img">
+                                        <img src="{{ pare_url_file($item->pro_avatar) }}" alt="Product Image">
+                                    </div>
+                                    <div class="product-info">
+                                        <a href="javascript:void(0)" class="product-title">
+                                            {{  $item->pro_view }} <i class="fa fa-eye"></i>
+                                            <span class="label label-warning pull-right">{{ number_format($item->pro_price,0,',','.') }} đ</span>
+                                        </a>
+                                        <span class="product-description">{{ $item->pro_name }}</span>
+                                    </div>
+                                </li>
+                            @endforeach
+                        </ul>
+                    </div>
+                    <!-- /.box-body -->
+                    <div class="box-footer text-center">
+                        {{--<a href="javascript:void(0)" class="uppercase">View All Products</a>--}}
+                    </div>
+                    <!-- /.box-footer -->
+                </div>
+                <!-- /.box -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </section>
 @stop
 
 @section('script')
