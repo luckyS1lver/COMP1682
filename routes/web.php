@@ -10,8 +10,22 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/clear-cache', function() {
+    $exitCode = Artisan::call('cache:clear');
+    // return what you want
+});
 
-
+Route::get('/website/down', function() {
+    $down = Artisan::call('down');
+    // return what you want
+});
+Route::get('/website/up', function() {
+    $down = Artisan::call('up');
+    // return what you want
+});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 Route::group(['namespace' => 'Auth','prefix' => 'account'], function(){
     Route::get('register','RegisterController@getFormRegister')->name('get.register');
     Route::post('register','RegisterController@postRegister');
@@ -38,9 +52,62 @@ Route::group(['prefix' => 'admin-auth','namespace' => 'Admin\Auth'], function() 
     Route::get('logout','AdminLoginController@getLogoutAdmin')->name('get.logout.admin');
 });
 
-Route::get('/', function () {
-    return view('welcome');
+
+Route::group(['namespace' => 'Frontend'], function() {
+    Route::get('/','HomeController@index')->name('get.home');
+    Route::get('ajax-load-product-recently','HomeController@getLoadProductRecently')->name('ajax_get.product_recently');
+    Route::get('ajax-load-slide','HomeController@loadSlideHome')->name('ajax_get.slide');
+    Route::get('san-pham','ProductController@index')->name('get.product.list');
+    Route::get('danh-muc/{slug}','CategoryController@index')->name('get.category.list');
+    Route::get('san-pham/{slug}','ProductDetailController@getProductDetail')->name('get.product.detail');
+    Route::get('san-pham/{slug}/danh-gia','ProductDetailController@getListRatingProduct')->name('get.product.rating_list');
+
+    Route::get('bai-viet','BlogController@index')->name('get.blog.home');
+    Route::get('menu/{slug}','BlogMenuController@getArticleByMenu')->name('get.article.by_menu');
+    Route::get('bai-viet/{slug}','ArticleDetailController@index')->name('get.blog.detail');
+    // GIỏ hàng
+    Route::get('don-hang','ShoppingCartController@index')->name('get.shopping.list');
+    Route::prefix('shopping')->group(function () {
+        Route::get('add/{id}','ShoppingCartController@add')->name('get.shopping.add');
+        Route::get('delete/{id}','ShoppingCartController@delete')->name('get.shopping.delete');
+        Route::get('update/{id}','ShoppingCartController@update')->name('ajax_get.shopping.update');
+        Route::get('theo-doi-don-hang','TrackOrderController@index')->name('get.track.transaction');
+        Route::post('pay','ShoppingCartController@postPay')->name('post.shopping.pay');
+        Route::get('update/cart/discount','ShoppingCartController@cartDiscount')->name('ajax_get.update.cart.discount');
+        Route::post('payment/online','ShoppingCartController@createPayment')->name('payment.online');
+        Route::get('vnpay/return', 'ShoppingCartController@vnpayReturn')->name('vnpay.return');
+    });
+
+    //Comment
+    Route::group(['prefix' => 'comment', 'middleware' => 'check_user_login'], function(){
+        Route::post('ajax-comment','CommentsController@store')->name('ajax_post.comment');
+    });
+
+    Route::get('lien-he','ContactController@index')->name('get.contact');
+    Route::get('convert-word-to-pdf', 'ContactController@convertWordToPdf')->name('convert.word.to.pdf');
+    Route::post('lien-he','ContactController@store');
+    Route::get('san-pham-ban-da-xem','PageStaticController@getProductView')->name('get.static.product_view');
+    Route::get('ajax/san-pham-ban-da-xem','PageStaticController@getListProductView')->name('ajax_get.product_view');
+    Route::get('huong-dan-mua-hang','PageStaticController@getShoppingGuide')->name('get.static.shopping_guide');
+    Route::get('chinh-sach-doi-tra','PageStaticController@getReturnPolicy')->name('get.static.return_policy');
+    Route::get('cham-soc-khach-hang','PageStaticController@getCustomerCare')->name('get.static.customer_care');
+    Route::get('gioi-thieu','PageStaticController@getAboutUs')->name('get.static.about.us');
+    Route::get('dich-vu/{type}','PageStaticController@getService')->name('get.static.service');
+    Route::get('chinh-sach-bao-hanh','PageStaticController@getWarrantyPolicy')->name('get.static.warranty_policy');
+
+
+
+    Route::get('ajax/load-document','PageStaticController@getDocumentAjax')->name('get_ajax.static.document');
+    Route::get('demo/view-file','PageStaticController@getDemoViewFile');
+
+    Route::group(['prefix' => 'document'], function(){
+        Route::get('/index','DocumentController@index')->name('get.document.index');
+        Route::get('/list','DocumentController@list')->name('get.document.list');
+        Route::get('/detail','DocumentController@detail')->name('get.document.detail');
+    });
+
 });
+
 include 'route_api.php';
 
 //Route::get('/home', 'HomeController@index')->name('get.home');
