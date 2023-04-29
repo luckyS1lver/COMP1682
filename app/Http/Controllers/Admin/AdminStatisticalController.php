@@ -91,7 +91,7 @@ class AdminStatisticalController extends Controller
             ->where('tst_status', 3)
             ->sum('tst_total_money');
 
-        //Doanh thu theo tháng ứng với trạng thái đã xử lý
+        //Doanh thu theo tháng ứng với trạng thái hoàn thành
         $revenueTransactionMonth = Transaction::where('tst_status', 3)
             ->whereMonth('created_at', $month)->whereYear('created_at', $year)
             ->select(\DB::raw('sum(tst_total_money) as totalMoney'), \DB::raw('DATE(created_at) day'))
@@ -106,14 +106,14 @@ class AdminStatisticalController extends Controller
             ->get()->toArray();
 
         //Doanh thu theo tháng ứng với trạng thái hủy
-        $revenueTransactionMonthCancel = Transaction::where('tst_status', 4)
+        $revenueTransactionMonthCancel = Transaction::where('tst_status', -1)
             ->whereMonth('created_at', $month)->whereYear('created_at', $year)
             ->select(\DB::raw('sum(tst_total_money) as totalMoney'), \DB::raw('DATE(created_at) day'))
             ->groupBy('day')
             ->get()->toArray();
 
-        //Doanh thu theo tháng ứng với trạng thái hủy
-        $revenueTransactionMonthTransport = Transaction::where('tst_status', -1)
+        //Doanh thu theo tháng ứng với trạng thái đang vận chuyển
+        $revenueTransactionMonthTransport = Transaction::where('tst_status', 2)
             ->whereMonth('created_at', $month)->whereYear('created_at', $year)
             ->select(\DB::raw('sum(tst_total_money) as totalMoney'), \DB::raw('DATE(created_at) day'))
             ->groupBy('day')
