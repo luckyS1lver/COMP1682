@@ -1,5 +1,5 @@
 @extends('layouts.app_master_frontend')
-@section('title_page', $page->s_title)
+@section('title_page', $page->s_title ?? '')
 @section('css')
     <link rel="stylesheet" href="{{ asset('css/blog_detail.min.css') }}">
 @stop
@@ -10,9 +10,9 @@
                 <li >
                     <a href="/" title="Home"><span itemprop="title">Trang chủ</span></a>
                 </li>
-                
+
                 <li >
-                    <a href="javascript://" title="Đồng hồ chính hãng"><span itemprop="title">{{  $page->s_title ?? '' }}</span></a>
+                    <a href="javascript://" title="Đồng hồ chính hãng"><span itemprop="title">{{ isset($page) ? $page->s_title : '' }}</span></a>
                 </li>
             </ul>
         </div>
@@ -20,7 +20,7 @@
             <div class="left">
                 <div class="post-detail">
                     <div class="post-detail__content">
-                        {!! $page->s_content ?? '' !!}
+                        {!! isset($page) ? $page->s_content : '' !!}
                     </div>
 
                 </div>
