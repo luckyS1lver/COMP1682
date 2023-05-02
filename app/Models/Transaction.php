@@ -10,9 +10,9 @@ class Transaction extends Model
 {
     protected $guarded = [''];
 
-    const VNP_URL = "http://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
-    const VNP_HASH_SECRET = "DTHXNFNBUMNKFKQOZVHTXUXNUQUUXMTV";
-    const VNP_TMN_CODE = "Y4U88XFK";
+    const VNP_URL = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
+    const VNP_HASH_SECRET = "ZMWZKDTJXJSTRMLLORGSCUFPQMAPXEUT";
+    const VNP_TMN_CODE = "A45F5GNM";
 
     protected $status = [
         '1' => [
