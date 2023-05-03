@@ -57,23 +57,23 @@ class ResetPasswordController extends Controller
     {
         $token = $request->_token;
 
-        //Check tồn tại token 
+        //Check tồn tại token
         $checkToken = \DB::table('password_resets')
             ->where('token',$token)
             ->first();
 
-    
+
         if (!$checkToken)  return redirect()->to('/');
 
 
-        // Check xem time taoj token quá 3phút chưa 
+        // Check xem time taoj token quá 3phút chưa
         $now = Carbon::now();
-        if ($now->diffInMinutes($checkToken->created_at) > 3) {
-            \DB::table('password_resets')->where('email', $request->email)->delete();   
+        if ($now->diffInMinutes($checkToken->created_at) > 10) {
+            \DB::table('password_resets')->where('email', $request->email)->delete();
             return redirect()->to('/');
         }
 
-        return view('auth.passwords.reset'); 
+        return view('auth.passwords.reset');
     }
 
     public function savePassword(UserRequestNewPassword $request)
