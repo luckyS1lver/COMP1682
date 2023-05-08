@@ -84,6 +84,9 @@ class HomeController extends FrontendController
             ->orderByDesc('id')
             ->limit(4)
             ->get();
+        $slides = Slide::where('sd_active', 1)
+            ->orderBy('sd_sort', 'asc')
+            ->get();
 
         $viewData = [
             'productsNew'   => $productsNew,
@@ -94,7 +97,8 @@ class HomeController extends FrontendController
             'event3'        => $event3,
             'title_page'    => "Website bán hàng",
             'categoriesHot' => $categoriesHot,
-            'articlesHot'   => $articlesHot
+            'articlesHot'   => $articlesHot,
+            'slides'   => $slides,
         ];
 
         return view('frontend.pages.home.index', $viewData);

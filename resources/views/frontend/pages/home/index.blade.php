@@ -9,13 +9,7 @@
 @section('content')
 
     <div id="content-slide">
-        <div class="spinner">
-            <div class="rect1"></div>
-            <div class="rect2"></div>
-            <div class="rect3"></div>
-            <div class="rect4"></div>
-            <div class="rect5"></div>
-        </div>
+        @include('frontend.pages.home.include._inc_slide', compact('slides'))
     </div>
     <div class="container" id="before-slide">
         {{-- <div class="logo-partner">
