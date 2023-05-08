@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.4
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 02, 2022 at 05:01 PM
--- Server version: 10.4.17-MariaDB
--- PHP Version: 7.4.14
+-- Generation Time: May 08, 2023 at 04:04 PM
+-- Server version: 10.4.27-MariaDB
+-- PHP Version: 7.4.33
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -29,14 +29,15 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `admins` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `phone` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `log_login` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `class` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `address` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `avatar` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `name` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `phone` varchar(255) NOT NULL,
+  `log_login` text DEFAULT NULL,
+  `class` varchar(255) DEFAULT NULL,
+  `address` varchar(255) DEFAULT NULL,
+  `avatar` varchar(255) DEFAULT NULL,
+  `role` int(11) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -45,9 +46,14 @@ CREATE TABLE `admins` (
 -- Dumping data for table `admins`
 --
 
-INSERT INTO `admins` (`id`, `name`, `email`, `password`, `phone`, `log_login`, `class`, `address`, `avatar`, `created_at`, `updated_at`) VALUES
-(1, 'Admin', 'admin@gmail.com', '$2y$10$wkjMG/vGGEJ21wIARDJDiOZnBxO8p5eyDrc3gw.0E9.oKNKqp0QD.', '0988113679', NULL, NULL, NULL, '2021-08-04__hqdefault.jpg', NULL, NULL),
-(3, 'Nhân viên', 'nhanvien@gmail.com', '$2y$10$UjezSZlczZoMHu5Xj6rTQ.1KhoWP6pt1D1EYft64t2GjUUw.diQom', '0359020898', NULL, NULL, 'Đại Học Sư Phạm Hà Nội', NULL, NULL, NULL);
+INSERT INTO `admins` (`id`, `name`, `email`, `password`, `phone`, `log_login`, `class`, `address`, `avatar`, `role`, `created_at`, `updated_at`) VALUES
+(1, 'Admin', 'admin@gmail.com', '$2y$10$wkjMG/vGGEJ21wIARDJDiOZnBxO8p5eyDrc3gw.0E9.oKNKqp0QD.', '0988113679', NULL, NULL, NULL, '2023-05-03__mug.jpg', NULL, NULL, NULL),
+(3, 'Nhân viên', 'nhanvien@gmail.com', '$2y$10$UjezSZlczZoMHu5Xj6rTQ.1KhoWP6pt1D1EYft64t2GjUUw.diQom', '0359020898', NULL, NULL, 'Đại Học Sư Phạm Hà Nội', NULL, NULL, NULL, NULL),
+(4, 'Nguyễn Văn A', 'nguyenvana@gmail.com', '$2y$10$Ya6HmT6jswYxjovTaNNMJeX/6k0lizydTki6U52b.6nL0zi1XqBEW', '0928817229', NULL, NULL, 'Hà Nội', '2023-02-19__17082022-2.png', 2, NULL, NULL),
+(7, 'nguyen', 'nguyeb@gmail.com', '$2y$10$XNaUkccJbA2ElqNfSUCHde6knVNkXnh/iR/zZ/DgN6MBCSIu1.zxa', '0359020899', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(8, 'Nguyễn Văn C', 'nguyenvanc@gmail.com', '$2y$10$8yvpDKXJf8XbnCcHKb4JQ.DRDGk33Yigd2NLmA2MWBCcDi1YCOqYS', '01658020888', NULL, NULL, 'Hà Nội', NULL, NULL, NULL, NULL),
+(9, 'A', 'nguyenvans@gmail.com', '$2y$10$HIjnKM/YH52AaSU5Qma2wOCkgCM7eggg2ydJBUayA6fvU09d8InRW', '0928817556', NULL, NULL, 'Hà Nội', NULL, NULL, NULL, NULL),
+(10, 'bc', 'bc@gmail.com', '$2y$10$EcxKhkfOyJUSRKqbYcJiseZBnN02mz4bB6V8t9BsvLGs7A/.oJAdS', '092884567', NULL, NULL, 'Hà nội', NULL, NULL, NULL, '2023-05-03 12:21:04');
 
 -- --------------------------------------------------------
 
@@ -57,15 +63,15 @@ INSERT INTO `admins` (`id`, `name`, `email`, `password`, `phone`, `log_login`, `
 
 CREATE TABLE `articles` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `a_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `a_slug` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `a_name` varchar(255) NOT NULL,
+  `a_slug` varchar(255) NOT NULL,
   `a_hot` tinyint(4) NOT NULL DEFAULT 0,
   `a_active` tinyint(4) NOT NULL DEFAULT 1,
   `a_menu_id` int(11) NOT NULL DEFAULT 0,
   `a_view` int(11) NOT NULL DEFAULT 0,
-  `a_description` mediumtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `a_avatar` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `a_content` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `a_description` mediumtext DEFAULT NULL,
+  `a_avatar` varchar(255) DEFAULT NULL,
+  `a_content` text DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `a_position_2` tinyint(4) NOT NULL DEFAULT 0,
   `a_position_1` tinyint(4) NOT NULL DEFAULT 0,
@@ -85,7 +91,7 @@ INSERT INTO `articles` (`id`, `a_name`, `a_slug`, `a_hot`, `a_active`, `a_menu_i
 INSERT INTO `articles` (`id`, `a_name`, `a_slug`, `a_hot`, `a_active`, `a_menu_id`, `a_view`, `a_description`, `a_avatar`, `a_content`, `created_at`, `a_position_2`, `a_position_1`, `updated_at`) VALUES
 (9, 'Những tác hại việc sử dụng sai dây và cáp điện kém chất lượng', 'nhung-tac-hai-viec-su-dung-sai-day-va-cap-dien-kem-chat-luong', 1, 1, 2, 0, 'Dây và cáp điện sử dụng rất phổ biến trong các công trình dân dụng, công trình ngoài trời.', '2021-07-16__an-toan-su-dung-dien-day-va-cap-dien-dan-dung-kem-chat-luong.jpg', '<p style=\"text-align:justify\"><span style=\"font-size:16px\"><span style=\"color:#333e48\"><span style=\"font-family:&quot;Open Sans&quot;,Helvetica,Arial,sans-serif\"><span style=\"background-color:#ffffff\"><span style=\"color:#000000\"><span style=\"font-size:18px\"><span style=\"font-family:Muli\">D&acirc;y v&agrave; c&aacute;p điện sử dụng rất phổ biến trong c&aacute;c c&ocirc;ng tr&igrave;nh d&acirc;n dụng, c&ocirc;ng tr&igrave;nh ngo&agrave;i trời. Hoặc trong c&aacute;c nh&agrave; m&aacute;y, khu c&ocirc;ng nghiệp cũng như nh&agrave; xưởng, c&aacute;c dự &aacute;n nh&agrave; chung cư, biệt thự.</span></span></span></span></span></span></span></p>\r\n\r\n<p style=\"text-align:justify\"><span style=\"font-size:16px\"><span style=\"color:#333e48\"><span style=\"font-family:&quot;Open Sans&quot;,Helvetica,Arial,sans-serif\"><span style=\"background-color:#ffffff\"><span style=\"color:#000000\"><span style=\"font-size:18px\"><span style=\"font-family:Muli\">Việc sử dụng những d&acirc;y v&agrave; c&aacute;p điện chất lượng k&eacute;m kh&ocirc;ng những g&acirc;y hậu quả nghi&ecirc;m trọng m&agrave; c&ograve;n l&agrave;m thiệt hại về kinh tế cũng như đến sự an to&agrave;n của người vận h&agrave;nh v&agrave; khai th&aacute;c sau n&agrave;y.</span></span></span></span></span></span></span></p>\r\n\r\n<p style=\"text-align:justify\"><span style=\"font-size:16px\"><span style=\"color:#333e48\"><span style=\"font-family:&quot;Open Sans&quot;,Helvetica,Arial,sans-serif\"><span style=\"background-color:#ffffff\"><strong><span style=\"font-size:18px\"><span style=\"font-family:Muli\">1. Những t&aacute;c hại việc sử dụng d&acirc;y v&agrave; c&aacute;p điện k&eacute;m chất lượng</span></span></strong></span></span></span></span></p>\r\n\r\n<p style=\"text-align:justify\"><span style=\"font-size:16px\"><span style=\"color:#333e48\"><span style=\"font-family:&quot;Open Sans&quot;,Helvetica,Arial,sans-serif\"><span style=\"background-color:#ffffff\"><span style=\"color:#000000\"><span style=\"font-size:18px\"><span style=\"font-family:Muli\">&ndash; Khi ruột đồng k&eacute;m chất lượng hoặc kh&ocirc;ng đủ tiết diện c&oacute; thể g&acirc;y ra c&aacute;c t&aacute;c hại sau:</span></span></span></span></span></span></span></p>\r\n\r\n<p style=\"text-align:justify\"><span style=\"font-size:16px\"><span style=\"color:#333e48\"><span style=\"font-family:&quot;Open Sans&quot;,Helvetica,Arial,sans-serif\"><span style=\"background-color:#ffffff\"><span style=\"color:#000000\"><span style=\"font-size:18px\"><span style=\"font-family:Muli\">+ Dẫn điện k&eacute;m, g&acirc;y sụt &aacute;p tr&ecirc;n đường d&acirc;y l&agrave;m cho thiết bị họat động kh&ocirc;ng hiệu quả, tuổi thọ thiết bị giảm nhanh.</span></span></span></span></span></span></span></p>\r\n\r\n<p style=\"text-align:justify\"><span style=\"font-size:16px\"><span style=\"color:#333e48\"><span style=\"font-family:&quot;Open Sans&quot;,Helvetica,Arial,sans-serif\"><span style=\"background-color:#ffffff\"><span style=\"color:#000000\"><span style=\"font-size:18px\"><span style=\"font-family:Muli\">+ Ph&aacute;t n&oacute;ng qu&aacute; mức tr&ecirc;n đường d&acirc;y, g&acirc;y hư hại lớp c&aacute;ch điện, g&acirc;y chạm chập ch&aacute;y nổ.</span></span></span></span></span></span></span></p>\r\n\r\n<p style=\"text-align:justify\"><span style=\"font-size:16px\"><span style=\"color:#333e48\"><span style=\"font-family:&quot;Open Sans&quot;,Helvetica,Arial,sans-serif\"><span style=\"background-color:#ffffff\"><span style=\"color:#000000\"><span style=\"font-size:18px\"><span style=\"font-family:Muli\">+ Ruột đồng k&eacute;m chất lượng rất dễ g&atilde;y, kh&oacute; nối, kh&oacute; lắp v&agrave;o c&aacute;c phụ kiện điện kh&aacute;c.</span></span></span></span></span></span></span></p>\r\n\r\n<p style=\"text-align:justify\"><span style=\"font-size:16px\"><span style=\"color:#333e48\"><span style=\"font-family:&quot;Open Sans&quot;,Helvetica,Arial,sans-serif\"><span style=\"background-color:#ffffff\"><span style=\"color:#000000\"><span style=\"font-size:18px\"><span style=\"font-family:Muli\">&ndash; Khi lớp c&aacute;ch điện k&eacute;m chất lượng c&oacute; thể g&acirc;y ra c&aacute;c t&aacute;c hại sau:</span></span></span></span></span></span></span></p>\r\n\r\n<p style=\"text-align:justify\"><span style=\"font-size:16px\"><span style=\"color:#333e48\"><span style=\"font-family:&quot;Open Sans&quot;,Helvetica,Arial,sans-serif\"><span style=\"background-color:#ffffff\"><span style=\"color:#000000\"><span style=\"font-size:18px\"><span style=\"font-family:Muli\">+ Nứt c&aacute;ch điện, hở ruột dẫn, g&acirc;y điện giật cho người.</span></span></span></span></span></span></span></p>\r\n\r\n<p style=\"text-align:justify\"><span style=\"font-size:16px\"><span style=\"color:#333e48\"><span style=\"font-family:&quot;Open Sans&quot;,Helvetica,Arial,sans-serif\"><span style=\"background-color:#ffffff\"><span style=\"color:#000000\"><span style=\"font-size:18px\"><span style=\"font-family:Muli\">+ Rạn nứt c&aacute;ch điện sau một thời gian ngắn, g&acirc;y r&ograve; điện, tổn thất điện năng, chạm chập ch&aacute;y nổ.</span></span></span></span></span></span></span></p>\r\n\r\n<p style=\"text-align:justify\"><span style=\"font-size:16px\"><span style=\"color:#333e48\"><span style=\"font-family:&quot;Open Sans&quot;,Helvetica,Arial,sans-serif\"><span style=\"background-color:#ffffff\"><span style=\"color:#000000\"><span style=\"font-size:18px\"><span style=\"font-family:Muli\">+ Kh&ocirc;ng chịu được nhiệt độ cho ph&eacute;p của ruột dẫn, chảy nh&atilde;o g&acirc;y ra chạm chập ch&aacute;y nổ.</span></span></span></span></span></span></span></p>\r\n\r\n<p style=\"text-align:justify\"><span style=\"font-size:16px\"><span style=\"color:#333e48\"><span style=\"font-family:&quot;Open Sans&quot;,Helvetica,Arial,sans-serif\"><span style=\"background-color:#ffffff\"><span style=\"color:#000000\"><span style=\"font-size:18px\"><span style=\"font-family:Muli\">+ Kh&ocirc;ng tự tắt khi bị ph&aacute;t ch&aacute;y bởi t&aacute;c nh&acirc;n b&ecirc;n ngo&agrave;i.</span></span></span></span></span></span></span></p>\r\n\r\n<p style=\"text-align:justify\"><span style=\"font-size:16px\"><span style=\"color:#333e48\"><span style=\"font-family:&quot;Open Sans&quot;,Helvetica,Arial,sans-serif\"><span style=\"background-color:#ffffff\"><span style=\"color:#000000\"><span style=\"font-size:18px\"><span style=\"font-family:Muli\">+ Mất m&agrave;u sau một thời gian ngắn, g&acirc;y nhầm lẫn c&aacute;c d&acirc;y với nhau khi sửa chữa, thay thế.</span></span></span></span></span></span></span></p>\r\n\r\n<p style=\"text-align:justify\">&nbsp;</p>\r\n\r\n<p style=\"text-align:justify\"><span style=\"font-size:16px\"><span style=\"color:#333e48\"><span style=\"font-family:&quot;Open Sans&quot;,Helvetica,Arial,sans-serif\"><span style=\"background-color:#ffffff\"><strong><span style=\"font-size:18px\"><span style=\"font-family:Muli\">2. Những kinh nghiệm chọn d&acirc;y dẫn điện d&acirc;n dụng trong gia đ&igrave;nh</span></span></strong></span></span></span></span></p>\r\n\r\n<p style=\"text-align:justify\"><span style=\"font-size:16px\"><span style=\"color:#333e48\"><span style=\"font-family:&quot;Open Sans&quot;,Helvetica,Arial,sans-serif\"><span style=\"background-color:#ffffff\"><span style=\"color:#000000\"><span style=\"font-size:18px\"><span style=\"font-family:Muli\">Với rất nhiều c&aacute;c loại d&acirc;y điện tr&ecirc;n thị trường hiện nay, tốt c&oacute;, xấu c&oacute;, thật c&oacute;, giả c&oacute;, thậm ch&iacute; c&oacute; khi gặp d&acirc;y chẳng c&oacute; nh&atilde;n m&aacute;c, t&ecirc;n nh&agrave; sản xuất g&igrave; cả. V&igrave; vậy, một người kh&ocirc;ng chuy&ecirc;n th&igrave; việc lựa chọn d&acirc;y n&agrave;o, nh&atilde;n hiệu n&agrave;o m&agrave; c&oacute; thể tin cậy được l&agrave; một việc kh&ocirc;ng dễ d&agrave;ng g&igrave;.</span></span></span></span></span></span></span></p>\r\n\r\n<p style=\"text-align:justify\"><span style=\"font-size:16px\"><span style=\"color:#333e48\"><span style=\"font-family:&quot;Open Sans&quot;,Helvetica,Arial,sans-serif\"><span style=\"background-color:#ffffff\"><span style=\"color:#000000\"><span style=\"font-size:18px\"><span style=\"font-family:Muli\">Sau đ&acirc;y l&agrave; 1 v&agrave;i kinh nghiệm để c&aacute;c bạn chọn lựa d&acirc;y tốt hơn:</span></span></span></span></span></span></span></p>\r\n\r\n<p style=\"text-align:justify\"><span style=\"font-size:16px\"><span style=\"color:#333e48\"><span style=\"font-family:&quot;Open Sans&quot;,Helvetica,Arial,sans-serif\"><span style=\"background-color:#ffffff\"><span style=\"color:#000000\"><span style=\"font-size:18px\"><span style=\"font-family:Muli\">+ Kh&ocirc;ng n&ecirc;n chọn d&acirc;y kh&ocirc;ng c&oacute; nh&atilde;n m&aacute;c tr&ecirc;n bao b&igrave;, kh&ocirc;ng c&oacute; t&ecirc;n nh&agrave; sản xuất, kh&ocirc;ng địa chỉ r&otilde; r&agrave;ng.</span></span></span></span></span></span></span></p>\r\n\r\n<p style=\"text-align:justify\"><span style=\"font-size:16px\"><span style=\"color:#333e48\"><span style=\"font-family:&quot;Open Sans&quot;,Helvetica,Arial,sans-serif\"><span style=\"background-color:#ffffff\"><span style=\"color:#000000\"><span style=\"font-size:18px\"><span style=\"font-family:Muli\">+ Kh&ocirc;ng n&ecirc;n chọn d&acirc;y m&agrave; tr&ecirc;n d&acirc;y kh&ocirc;ng c&oacute; c&aacute;c th&ocirc;ng tin cơ bản như: nh&atilde;n hiệu, t&ecirc;n loại d&acirc;y, tiết diện, cấu tr&uacute;c ruột dẫn (số sợi v&agrave; đường k&iacute;nh mỗi sợi), ti&ecirc;u chuẩn sản xuất.</span></span></span></span></span></span></span></p>\r\n\r\n<p style=\"text-align:justify\"><span style=\"font-size:16px\"><span style=\"color:#333e48\"><span style=\"font-family:&quot;Open Sans&quot;,Helvetica,Arial,sans-serif\"><span style=\"background-color:#ffffff\"><span style=\"color:#000000\"><span style=\"font-size:18px\"><span style=\"font-family:Muli\">+ D&acirc;y tốt thường c&oacute; bề ngo&agrave;i của vỏ nhựa b&oacute;ng, l&aacute;ng.</span></span></span></span></span></span></span></p>\r\n\r\n<p style=\"text-align:justify\"><span style=\"font-size:16px\"><span style=\"color:#333e48\"><span style=\"font-family:&quot;Open Sans&quot;,Helvetica,Arial,sans-serif\"><span style=\"background-color:#ffffff\"><span style=\"color:#000000\"><span style=\"font-size:18px\"><span style=\"font-family:Muli\">+ Lớp nhựa c&aacute;ch điện của d&acirc;y tốt rất dẻo, khi tuốt ra khỏi ruột dẫn, c&oacute; thể k&eacute;o gi&atilde;n gấp đ&ocirc;i, gấp ba chiều d&agrave;i ban đầu m&agrave; chưa bị đứt. D&acirc;y c&oacute; thể bẻ gập nhiều lần hoặc xoắn g&uacute;t nhưng bề mặt c&aacute;ch điện kh&ocirc;ng bị rạng nứt.</span></span></span></span></span></span></span></p>\r\n\r\n<p style=\"text-align:justify\"><span style=\"font-size:16px\"><span style=\"color:#333e48\"><span style=\"font-family:&quot;Open Sans&quot;,Helvetica,Arial,sans-serif\"><span style=\"background-color:#ffffff\"><span style=\"color:#000000\"><span style=\"font-size:18px\"><span style=\"font-family:Muli\">+ C&oacute; thể kiểm tra ruột dẫn, bằng c&aacute;ch đếm số sợi nhỏ b&ecirc;n trong so với số sợi được ghi b&ecirc;n ngo&agrave;i. Đường k&iacute;nh của c&aacute;c sợi nhỏ b&ecirc;n trong rất kh&oacute; kiểm tra, v&igrave; phải c&oacute; thước chuy&ecirc;n d&ugrave;ng mới đo được. Tuy nhi&ecirc;n, với một thương hiệu uy t&iacute;n, tr&ecirc;n d&acirc;y c&oacute; ghi cụ thể cấu tr&uacute;c ruột dẫn (số sợi v&agrave; đường k&iacute;nh mỗi sợi) th&igrave; c&oacute; thể tin tưởng được.</span></span></span></span></span></span></span></p>\r\n\r\n<p style=\"text-align:justify\"><span style=\"font-size:16px\"><span style=\"color:#333e48\"><span style=\"font-family:&quot;Open Sans&quot;,Helvetica,Arial,sans-serif\"><span style=\"background-color:#ffffff\"><span style=\"color:#000000\"><span style=\"font-size:18px\"><span style=\"font-family:Muli\">+ D&acirc;y tốt th&igrave; c&oacute; ruột dẫn s&aacute;ng, b&oacute;ng, nếu l&agrave; d&acirc;y đồng th&igrave; ruột dẫn rất mềm dẻo. Đối với d&acirc;y ruột dẫn đồng c&oacute; nhiều sợi nhỏ th&igrave; c&oacute; thể d&ugrave;ng hai ng&oacute;n tay xoắn ruột dẫn dễ d&agrave;ng m&agrave; c&aacute;c sợi nhỏ kh&ocirc;ng bung, kh&ocirc;ng g&atilde;y, kh&ocirc;ng đ&acirc;m v&agrave;o tay. Đối với d&acirc;y ruột dẫn c&oacute; một sợi th&igrave; c&oacute; thể bẻ gập ruột đồng đến v&agrave;i chục lần m&agrave; kh&ocirc;ng gẫy.</span></span></span></span></span></span></span></p>\r\n\r\n<p style=\"text-align:justify\"><span style=\"font-size:16px\"><span style=\"color:#333e48\"><span style=\"font-family:&quot;Open Sans&quot;,Helvetica,Arial,sans-serif\"><span style=\"background-color:#ffffff\"><span style=\"color:#000000\"><span style=\"font-size:18px\"><span style=\"font-family:Muli\">+ Th&ocirc;ng thường, d&acirc;y tốt c&oacute; gi&aacute; cao hơn d&acirc;y dỏm với c&ugrave;ng cỡ loại.</span></span></span></span></span></span></span></p>\r\n\r\n<p style=\"text-align:justify\">&nbsp;</p>\r\n\r\n<p style=\"text-align:justify\"><span style=\"font-size:16px\"><span style=\"color:#333e48\"><span style=\"font-family:&quot;Open Sans&quot;,Helvetica,Arial,sans-serif\"><span style=\"background-color:#ffffff\"><strong><span style=\"font-size:18px\"><span style=\"font-family:Muli\">3. C&aacute;c lưu &yacute; cho hệ thống điện d&acirc;n dụng</span></span></strong></span></span></span></span></p>\r\n\r\n<p style=\"text-align:justify\"><span style=\"font-size:16px\"><span style=\"color:#333e48\"><span style=\"font-family:&quot;Open Sans&quot;,Helvetica,Arial,sans-serif\"><span style=\"background-color:#ffffff\"><span style=\"color:#000000\"><span style=\"font-size:18px\"><span style=\"font-family:Muli\">N&ecirc;n chia đường điện ph&acirc;n phối trong nh&agrave; ở th&agrave;nh nhiều nh&aacute;nh để thuận tiện cho việc ngắt điện khi cần sửa chữa, thay thế.</span></span></span></span></span></span></span></p>\r\n\r\n<p style=\"text-align:justify\"><span style=\"font-size:16px\"><span style=\"color:#333e48\"><span style=\"font-family:&quot;Open Sans&quot;,Helvetica,Arial,sans-serif\"><span style=\"background-color:#ffffff\"><span style=\"color:#000000\"><span style=\"font-size:18px\"><span style=\"font-family:Muli\">C&aacute;c d&acirc;y pha (d&acirc;y n&oacute;ng) c&oacute; c&ugrave;ng m&agrave;u v&agrave; tốt nhất l&agrave; m&agrave;u đỏ, m&agrave;u cam hoặc m&agrave;u v&agrave;ng.</span></span></span></span></span></span></span></p>\r\n\r\n<p style=\"text-align:justify\"><span style=\"font-size:16px\"><span style=\"color:#333e48\"><span style=\"font-family:&quot;Open Sans&quot;,Helvetica,Arial,sans-serif\"><span style=\"background-color:#ffffff\"><span style=\"color:#000000\"><span style=\"font-size:18px\"><span style=\"font-family:Muli\">Khi c&oacute; nhiều nh&aacute;nh đi chung một tuyến m&agrave; k&iacute;ch cỡ giống nhau th&igrave; m&agrave;u của từng nh&aacute;nh n&ecirc;n kh&aacute;c nhau để dễ ph&acirc;n biệt.</span></span></span></span></span></span></span></p>\r\n\r\n<p style=\"text-align:justify\"><span style=\"font-size:16px\"><span style=\"color:#333e48\"><span style=\"font-family:&quot;Open Sans&quot;,Helvetica,Arial,sans-serif\"><span style=\"background-color:#ffffff\"><span style=\"color:#000000\"><span style=\"font-size:18px\"><span style=\"font-family:Muli\">D&acirc;y cho hệ thống nối đất n&ecirc;n c&oacute; m&agrave;u ri&ecirc;ng biệt với tất cả c&aacute;c d&acirc;y kh&aacute;c v&agrave; n&ecirc;n chọn d&acirc;y m&agrave;u xanh- sọc- v&agrave;ng hoặc v&agrave;ng- sọc- xanh.</span></span></span></span></span></span></span></p>\r\n\r\n<p style=\"text-align:justify\"><span style=\"font-size:16px\"><span style=\"color:#333e48\"><span style=\"font-family:&quot;Open Sans&quot;,Helvetica,Arial,sans-serif\"><span style=\"background-color:#ffffff\"><span style=\"color:#000000\"><span style=\"font-size:18px\"><span style=\"font-family:Muli\">Khi luồn d&acirc;y trong ống hoặc trong nẹp, phải chọn k&iacute;ch thước ống, nẹp đủ rộng sao cho dễ luồn, dễ r&uacute;t m&agrave; kh&ocirc;ng hư hại đến d&acirc;y dẫn.</span></span></span></span></span></span></span></p>\r\n\r\n<p style=\"text-align:justify\"><span style=\"font-size:16px\"><span style=\"color:#333e48\"><span style=\"font-family:&quot;Open Sans&quot;,Helvetica,Arial,sans-serif\"><span style=\"background-color:#ffffff\"><span style=\"color:#000000\"><span style=\"font-size:18px\"><span style=\"font-family:Muli\">Kh&ocirc;ng n&ecirc;n đi d&acirc;y nơi ẩm thấp hoặc qu&aacute; gần c&aacute;c nguồn nhiệt, h&oacute;a chất.</span></span></span></span></span></span></span></p>\r\n\r\n<p style=\"text-align:justify\"><span style=\"font-size:16px\"><span style=\"color:#333e48\"><span style=\"font-family:&quot;Open Sans&quot;,Helvetica,Arial,sans-serif\"><span style=\"background-color:#ffffff\"><span style=\"color:#000000\"><span style=\"font-size:18px\"><span style=\"font-family:Muli\">Mối nối d&acirc;y phải chặt, tiếp x&uacute;c tốt để kh&ocirc;ng g&acirc;y ra m&ocirc;-ve nặc lửa khi mang tải.</span></span></span></span></span></span></span></p>\r\n\r\n<p style=\"text-align:justify\"><span style=\"font-size:16px\"><span style=\"color:#333e48\"><span style=\"font-family:&quot;Open Sans&quot;,Helvetica,Arial,sans-serif\"><span style=\"background-color:#ffffff\"><span style=\"color:#000000\"><span style=\"font-size:18px\"><span style=\"font-family:Muli\">Kh&ocirc;ng được nối trực tiếp ruột dẫn đồng v&agrave; nh&ocirc;m với nhau.</span></span></span></span></span></span></span></p>\r\n\r\n<p style=\"text-align:justify\"><span style=\"font-size:16px\"><span style=\"color:#333e48\"><span style=\"font-family:&quot;Open Sans&quot;,Helvetica,Arial,sans-serif\"><span style=\"background-color:#ffffff\"><span style=\"color:#000000\"><span style=\"font-size:18px\"><span style=\"font-family:Muli\">Đoạn d&acirc;y đi trong ống kh&ocirc;ng n&ecirc;n c&oacute; mối nối.</span></span></span></span></span></span></span></p>\r\n\r\n<p style=\"text-align:justify\"><span style=\"font-size:16px\"><span style=\"color:#333e48\"><span style=\"font-family:&quot;Open Sans&quot;,Helvetica,Arial,sans-serif\"><span style=\"background-color:#ffffff\"><span style=\"color:#000000\"><span style=\"font-size:18px\"><span style=\"font-family:Muli\">Kh&ocirc;ng n&ecirc;n đi d&acirc;y &acirc;m trong nền của tầng trệt nếu nền kh&ocirc;ng đảm bảo cố định với tường khi nền bị l&uacute;n.</span></span></span></span></span></span></span></p>\r\n\r\n<p style=\"text-align:left\"><span style=\"font-size:16px\"><span style=\"color:#333e48\"><span style=\"font-family:&quot;Open Sans&quot;,Helvetica,Arial,sans-serif\"><span style=\"background-color:#ffffff\"><span style=\"font-size:18px\"><span style=\"font-family:Muli\"><span style=\"color:#000000\">Kh&ocirc;ng n&ecirc;n sử dụng d&acirc;y c&oacute; tiết diện nhỏ hơn 0.5mm2.</span></span></span></span></span></span></span></p>', '2021-04-17 05:13:00', 0, 0, '2021-07-15 17:17:15'),
 (10, 'Mô hình P2P Lending giúp tiếp cận vốn kinh doanh', 'mo-hinh-p2p-lending-giup-tiep-can-von-kinh-doanh', 0, 1, 1, 0, 'Các Doanh nghiệp vừa và nhỏ và Hộ kinh doanh luôn khó khăn trong việc tiếp cận vốn kinh doanh do không đáp ứng đủ các điều kiện về tài sản thế chấp và điều kiện vay vốn. Lendbiz tạo ra một kênh gọi vốn mới nhanh và hiệu quả cho các Chủ kinh doanh từ cộng đồng các Nhà đầu tư, qua đó tạo công ăn việc làm, góp phần phát triển Kinh tế xã hội.', '2021-09-15__lendbiz.png', '<p>C&aacute;c Doanh nghiệp vừa v&agrave; nhỏ v&agrave; Hộ kinh doanh lu&ocirc;n kh&oacute; khăn trong việc tiếp cận vốn kinh doanh do kh&ocirc;ng đ&aacute;p ứng đủ c&aacute;c điều kiện về t&agrave;i sản thế chấp v&agrave; điều kiện vay vốn. Lendbiz tạo ra một k&ecirc;nh gọi vốn mới nhanh v&agrave; hiệu quả cho c&aacute;c Chủ kinh doanh từ cộng đồng c&aacute;c Nh&agrave; đầu tư, qua đ&oacute; tạo c&ocirc;ng ăn việc l&agrave;m, g&oacute;p phần&nbsp;<strong>ph&aacute;t triển Kinh tế x&atilde; hội.</strong></p>\r\n\r\n<p>C&ocirc;ng ty Cổ phần Lendbiz được th&agrave;nh lập ng&agrave;y 10/10/2017 với mục ti&ecirc;u trở th&agrave;nh Tập đo&agrave;n c&ocirc;ng nghệ t&agrave;i ch&iacute;nh h&agrave;ng đầu trong lĩnh vực P2P Lending tại Việt Nam. Lendbiz l&agrave; cầu nối trung gian gi&uacute;p c&aacute;c Chủ kinh doanh gặp kh&oacute; khăn trong việc tiếp cận nguồn vốn từ c&aacute;c Định chế t&agrave;i ch&iacute;nh huy động được nguồn vốn kinh doanh từ cộng đồng c&aacute;c Nh&agrave; đầu tư. M&ocirc; h&igrave;nh n&agrave;y mang lợi &iacute;ch cho tất cả c&aacute;c b&ecirc;n, đồng thời g&oacute;p phần th&uacute;c đẩy sự ph&aacute;t triển chung của nền kinh tế Việt Nam.</p>', '2021-09-15 14:25:14', 1, 1, NULL),
-(11, 'Nguyên liệu và phụ gia thực phẩm PTech', 'nguyen-lieu-va-phu-gia-thuc-pham-ptech', 0, 1, 1, 0, 'Được thành lập từ năm 2005 với sự trợ giúp từ tập đoàn Zuellig Industrial,\r\nP Tech đã phát triển vượt bậc để trở thành một trong những nhà phân phối hàng đầu về nguyên liệu và phụ gia thực phẩm,\r\nvỏ bọc và bao bì xúc xích các loại tại thị trường Việt Nam.', '2021-09-15__ptech.png', '<p>Được th&agrave;nh lập từ năm 2005 với sự trợ gi&uacute;p từ tập đo&agrave;n Zuellig Industrial,<br />\r\nP Tech đ&atilde; ph&aacute;t triển vượt bậc để trở th&agrave;nh một trong những nh&agrave; ph&acirc;n phối h&agrave;ng đầu về nguy&ecirc;n liệu v&agrave; phụ gia thực phẩm,<br />\r\nvỏ bọc v&agrave; bao b&igrave; x&uacute;c x&iacute;ch c&aacute;c loại tại thị trường Việt Nam.<br />\r\n<br />\r\nCh&uacute;ng t&ocirc;i đang đại diện cho những nh&agrave; sản xuất h&agrave;ng đầu tr&ecirc;n thế giới về nguy&ecirc;n liệu thực phẩm, phụ gia thực thẩm v&agrave; hải sản,<br />\r\nhương liệu, tr&agrave; v&agrave; thảo dược, vỏ bọc v&agrave; bao b&igrave; x&uacute;c x&iacute;ch c&aacute;c loại.<br />\r\n<br />\r\nSản phẩm của ch&uacute;ng t&ocirc;i phục vụ cho nhiều ph&acirc;n kh&uacute;c của ng&agrave;nh c&ocirc;ng nghiệp thực phẩm, bao gồm chế biến thực phẩm,<br />\r\nchế biến hải sản, chế biến thịt, m&igrave; ăn liền, nước giải kh&aacute;t, sản phẩm từ sữa v&agrave; b&aacute;nh kẹo.</p>\r\n\r\n<p><em>(Chuyển nhượng quyền sử dụng, chuyển giao to&agrave;n phần...)</em></p>', '2021-09-15 14:26:11', 1, 1, NULL);
+(11, 'Nguyên liệu và phụ gia thực phẩm PTech', 'nguyen-lieu-va-phu-gia-thuc-pham-ptech', 0, 1, 2, 0, 'Được thành lập từ năm 2005 với sự trợ giúp từ tập đoàn Zuellig Industrial,P Tech đã phát triển vượt bậc để trở thành một trong những nhà phân phối hàng đầu về nguyên liệu và phụ gia thực phẩm,vỏ bọc và bao bì xúc xích các loại tại thị trường Việt Nam.', '2023-04-09__8-10-2022-paypal.png', '<p>Được th&agrave;nh lập từ năm 2005 với sự trợ gi&uacute;p từ tập đo&agrave;n Zuellig Industrial,<br />\r\nP Tech đ&atilde; ph&aacute;t triển vượt bậc để trở th&agrave;nh một trong những nh&agrave; ph&acirc;n phối h&agrave;ng đầu về nguy&ecirc;n liệu v&agrave; phụ gia thực phẩm,<br />\r\nvỏ bọc v&agrave; bao b&igrave; x&uacute;c x&iacute;ch c&aacute;c loại tại thị trường Việt Nam.<br />\r\n<br />\r\nCh&uacute;ng t&ocirc;i đang đại diện cho những nh&agrave; sản xuất h&agrave;ng đầu tr&ecirc;n thế giới về nguy&ecirc;n liệu thực phẩm, phụ gia thực thẩm v&agrave; hải sản,<br />\r\nhương liệu, tr&agrave; v&agrave; thảo dược, vỏ bọc v&agrave; bao b&igrave; x&uacute;c x&iacute;ch c&aacute;c loại.<br />\r\n<br />\r\nSản phẩm của ch&uacute;ng t&ocirc;i phục vụ cho nhiều ph&acirc;n kh&uacute;c của ng&agrave;nh c&ocirc;ng nghiệp thực phẩm, bao gồm chế biến thực phẩm,<br />\r\nchế biến hải sản, chế biến thịt, m&igrave; ăn liền, nước giải kh&aacute;t, sản phẩm từ sữa v&agrave; b&aacute;nh kẹo.</p>\r\n\r\n<p><em>(Chuyển nhượng quyền sử dụng, chuyển giao to&agrave;n phần...)</em></p>', '2021-09-15 14:26:11', 1, 1, '2023-04-09 13:05:42');
 
 -- --------------------------------------------------------
 
@@ -95,8 +101,8 @@ INSERT INTO `articles` (`id`, `a_name`, `a_slug`, `a_hot`, `a_active`, `a_menu_i
 
 CREATE TABLE `attributes` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `atb_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `atb_slug` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `atb_name` varchar(255) NOT NULL,
+  `atb_slug` varchar(255) NOT NULL,
   `atb_type_id` int(11) NOT NULL DEFAULT 0,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -110,13 +116,13 @@ CREATE TABLE `attributes` (
 
 CREATE TABLE `categories` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `c_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `c_name` varchar(255) NOT NULL,
   `c_parent_id` int(11) NOT NULL DEFAULT 0,
   `c_menu_id` bigint(20) DEFAULT NULL,
-  `c_slug` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `c_avatar` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `c_banner` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `c_description` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `c_slug` varchar(255) NOT NULL,
+  `c_avatar` varchar(255) DEFAULT NULL,
+  `c_banner` varchar(255) DEFAULT NULL,
+  `c_description` varchar(255) DEFAULT NULL,
   `c_hot` tinyint(4) NOT NULL DEFAULT 0,
   `c_status` tinyint(4) NOT NULL DEFAULT 1,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -163,9 +169,9 @@ INSERT INTO `categories` (`id`, `c_name`, `c_parent_id`, `c_menu_id`, `c_slug`, 
 
 CREATE TABLE `comments` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `cmt_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `cmt_email` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `cmt_content` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `cmt_name` varchar(255) DEFAULT NULL,
+  `cmt_email` varchar(255) DEFAULT NULL,
+  `cmt_content` text DEFAULT NULL,
   `cmt_parent_id` int(11) NOT NULL DEFAULT 0,
   `cmt_product_id` int(11) NOT NULL DEFAULT 0,
   `cmt_admin_id` int(11) NOT NULL DEFAULT 0,
@@ -184,10 +190,10 @@ CREATE TABLE `comments` (
 
 CREATE TABLE `contacts` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `c_title` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `c_phone` char(11) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `c_email` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `c_content` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `c_title` varchar(255) DEFAULT NULL,
+  `c_phone` char(11) DEFAULT NULL,
+  `c_email` varchar(255) DEFAULT NULL,
+  `c_content` text DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -200,7 +206,7 @@ CREATE TABLE `contacts` (
 
 CREATE TABLE `discount_code` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `d_code` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `d_code` varchar(191) NOT NULL,
   `d_number_code` int(11) NOT NULL DEFAULT 0,
   `d_date_start` datetime DEFAULT NULL,
   `d_date_end` datetime DEFAULT NULL,
@@ -214,7 +220,7 @@ CREATE TABLE `discount_code` (
 --
 
 INSERT INTO `discount_code` (`id`, `d_code`, `d_number_code`, `d_date_start`, `d_date_end`, `d_percentage`, `created_at`, `updated_at`) VALUES
-(1, 'GIAMGIATHANG4', 49, NULL, NULL, 30, '2021-04-14 15:35:00', '2021-04-17 09:57:22'),
+(1, 'GIAMGIATHANG4', 48, NULL, NULL, 30, '2021-04-14 15:35:00', '2023-02-17 13:31:00'),
 (2, 'GIAMGIATHANG8', 50, NULL, NULL, 10, '2021-08-03 18:07:48', '2021-08-03 18:07:48');
 
 -- --------------------------------------------------------
@@ -225,9 +231,9 @@ INSERT INTO `discount_code` (`id`, `d_code`, `d_number_code`, `d_date_start`, `d
 
 CREATE TABLE `events` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `e_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `e_banner` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `e_link` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `e_name` varchar(255) DEFAULT NULL,
+  `e_banner` varchar(255) DEFAULT NULL,
+  `e_link` varchar(255) DEFAULT NULL,
   `e_position_1` tinyint(4) NOT NULL DEFAULT 0,
   `e_position_2` tinyint(4) NOT NULL DEFAULT 0,
   `e_position_3` tinyint(4) NOT NULL DEFAULT 0,
@@ -253,10 +259,10 @@ INSERT INTO `events` (`id`, `e_name`, `e_banner`, `e_link`, `e_position_1`, `e_p
 
 CREATE TABLE `failed_jobs` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `connection` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `queue` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `exception` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `connection` text NOT NULL,
+  `queue` text NOT NULL,
+  `payload` longtext NOT NULL,
+  `exception` longtext NOT NULL,
   `failed_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -268,9 +274,9 @@ CREATE TABLE `failed_jobs` (
 
 CREATE TABLE `keywords` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `k_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `k_slug` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `k_description` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `k_name` varchar(255) NOT NULL,
+  `k_slug` varchar(255) NOT NULL,
+  `k_description` varchar(255) DEFAULT NULL,
   `k_hot` tinyint(4) NOT NULL DEFAULT 0,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -289,7 +295,7 @@ INSERT INTO `keywords` (`id`, `k_name`, `k_slug`, `k_description`, `k_hot`, `cre
 (15, 'Điện thoại chính hãng iPhone', 'dien-thoai-chinh-hang-iphone', NULL, 0, '2021-04-17 04:23:10', NULL),
 (16, 'Samsung', 'samsung', NULL, 0, '2021-04-17 04:23:15', NULL),
 (17, 'Oppo', 'oppo', NULL, 0, '2021-04-17 04:23:18', NULL),
-(18, 'Sony', 'sony', NULL, 0, '2021-04-17 04:23:22', NULL);
+(18, 'Sony', 'sony', NULL, 0, '2021-04-17 04:23:22', '2023-02-17 13:53:25');
 
 -- --------------------------------------------------------
 
@@ -299,11 +305,11 @@ INSERT INTO `keywords` (`id`, `k_name`, `k_slug`, `k_description`, `k_hot`, `cre
 
 CREATE TABLE `menus` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `mn_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `mn_slug` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `mn_avatar` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `mn_banner` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `mn_description` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `mn_name` varchar(255) NOT NULL,
+  `mn_slug` varchar(255) NOT NULL,
+  `mn_avatar` varchar(255) DEFAULT NULL,
+  `mn_banner` varchar(255) DEFAULT NULL,
+  `mn_description` varchar(255) DEFAULT NULL,
   `mn_hot` tinyint(4) NOT NULL DEFAULT 0,
   `mn_status` tinyint(4) NOT NULL DEFAULT 1,
   `mn_type` tinyint(4) DEFAULT 0,
@@ -330,7 +336,7 @@ INSERT INTO `menus` (`id`, `mn_name`, `mn_slug`, `mn_avatar`, `mn_banner`, `mn_d
 
 CREATE TABLE `migrations` (
   `id` int(10) UNSIGNED NOT NULL,
-  `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `migration` varchar(255) NOT NULL,
   `batch` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -389,8 +395,8 @@ CREATE TABLE `orders` (
   `od_sale` int(11) NOT NULL DEFAULT 0,
   `od_qty` tinyint(4) NOT NULL DEFAULT 0,
   `od_price` int(11) NOT NULL DEFAULT 0,
-  `od_size` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `od_color` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `od_size` varchar(50) DEFAULT NULL,
+  `od_color` varchar(100) DEFAULT NULL,
   `od_gender` tinyint(10) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -401,7 +407,11 @@ CREATE TABLE `orders` (
 --
 
 INSERT INTO `orders` (`id`, `od_transaction_id`, `od_product_id`, `od_sale`, `od_qty`, `od_price`, `od_size`, `od_color`, `od_gender`, `created_at`, `updated_at`) VALUES
-(17, 17, 50, 5, 1, 11010500, NULL, NULL, NULL, NULL, NULL);
+(17, 17, 50, 5, 1, 11010500, NULL, NULL, NULL, NULL, NULL),
+(18, 18, 33, 30, 1, 56000, NULL, NULL, NULL, NULL, NULL),
+(19, 19, 49, 0, 2, 130000, NULL, NULL, NULL, NULL, NULL),
+(20, 20, 50, 5, 1, 11010500, NULL, NULL, NULL, NULL, NULL),
+(21, 21, 32, 15, 1, 131750, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -410,8 +420,8 @@ INSERT INTO `orders` (`id`, `od_transaction_id`, `od_product_id`, `od_sale`, `od
 --
 
 CREATE TABLE `password_resets` (
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `token` varchar(255) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -420,7 +430,9 @@ CREATE TABLE `password_resets` (
 --
 
 INSERT INTO `password_resets` (`email`, `token`, `created_at`) VALUES
-('duocnvoit@gmail.com', '$2y$10$pbrzwKceNbJ/t6ay5uJODOz4bweHblK6bPysnuctlVyCFO58YkoSq', '2020-05-03 15:29:08');
+('duocnvoit@gmail.com', '$2y$10$pbrzwKceNbJ/t6ay5uJODOz4bweHblK6bPysnuctlVyCFO58YkoSq', '2020-05-03 15:29:08'),
+('nguyenvana@gmail.com', '$2y$10$Ns6BmF0WIiXbzI/YlZeAqOA0pohl1K3Z3UvLC5q.eIv4Ywa2iOuUa', '2023-05-03 12:18:41'),
+('kiettv1108@gmail.com', '$2y$10$H7FKoVOHXpABJCFxhMjioukWJUhYX.8m7tNkLIM.ROu0d1HxHmPCy', '2023-05-03 12:39:00');
 
 -- --------------------------------------------------------
 
@@ -433,11 +445,11 @@ CREATE TABLE `payments` (
   `p_transaction_id` int(11) DEFAULT NULL,
   `p_user_id` int(11) DEFAULT NULL,
   `p_money` double(8,2) DEFAULT NULL COMMENT 'Số tiền thanh toán',
-  `p_note` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Nội dung thanh toán',
-  `p_transaction_code` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `p_vnp_response_code` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Mã phản hồi',
-  `p_code_vnpay` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Mã giao dịch vnpay',
-  `p_code_bank` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Mã ngân hàng',
+  `p_note` varchar(191) DEFAULT NULL COMMENT 'Nội dung thanh toán',
+  `p_transaction_code` varchar(191) NOT NULL,
+  `p_vnp_response_code` varchar(255) DEFAULT NULL COMMENT 'Mã phản hồi',
+  `p_code_vnpay` varchar(255) DEFAULT NULL COMMENT 'Mã giao dịch vnpay',
+  `p_code_bank` varchar(255) DEFAULT NULL COMMENT 'Mã ngân hàng',
   `p_time` datetime DEFAULT NULL COMMENT 'Thời gian chuyển khoản',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -450,7 +462,9 @@ CREATE TABLE `payments` (
 INSERT INTO `payments` (`id`, `p_transaction_id`, `p_user_id`, `p_money`, `p_note`, `p_transaction_code`, `p_vnp_response_code`, `p_code_vnpay`, `p_code_bank`, `p_time`, `created_at`, `updated_at`) VALUES
 (2, 10, 4, 999999.99, 'dfgdfg', 'NyejqhQ6lVGJslE', '00', '13491813', 'NCB', '2021-04-17 17:02:00', NULL, NULL),
 (3, 11, 3, 999999.99, 'asdasd', 'Te9IFf3dhXeHToF', '00', '13543064', 'NCB', '2021-07-12 22:43:00', NULL, NULL),
-(4, 16, 9, 118575.00, 'sdfdsf', 'oQj2db5DdLOQGNS', '00', '13557491', 'NCB', '2021-08-04 01:13:00', NULL, NULL);
+(4, 16, 9, 118575.00, 'sdfdsf', 'oQj2db5DdLOQGNS', '00', '13557491', 'NCB', '2021-08-04 01:13:00', NULL, NULL),
+(5, 19, 11, 182000.00, 'thanh toan', 'ixnjz04Rqm2H5n0', '00', '13940682', 'NCB', '2023-02-17 20:54:00', NULL, NULL),
+(6, 20, 3, 999999.99, 'Thanh toan GD: dfgdgdfgdf', '5hrJlIqq3ApNpWu', '00', '14002922', 'NCB', '2023-05-02 21:52:00', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -460,10 +474,10 @@ INSERT INTO `payments` (`id`, `p_transaction_id`, `p_user_id`, `p_money`, `p_not
 
 CREATE TABLE `producer` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `pdr_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `pdr_slug` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `pdr_email` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `pdr_phone` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `pdr_name` varchar(255) NOT NULL,
+  `pdr_slug` varchar(255) NOT NULL,
+  `pdr_email` varchar(100) NOT NULL,
+  `pdr_phone` varchar(20) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -490,20 +504,20 @@ INSERT INTO `producer` (`id`, `pdr_name`, `pdr_slug`, `pdr_email`, `pdr_phone`, 
 
 CREATE TABLE `products` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `pro_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `pro_slug` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `pro_name` varchar(255) DEFAULT NULL,
+  `pro_slug` varchar(255) NOT NULL,
   `pro_price` int(11) NOT NULL DEFAULT 0,
   `pro_price_entry` int(11) NOT NULL DEFAULT 0 COMMENT 'giá nhập',
   `pro_category_id` int(11) NOT NULL DEFAULT 0,
   `pro_admin_id` int(11) NOT NULL DEFAULT 0,
   `pro_sale` tinyint(4) NOT NULL DEFAULT 0,
-  `pro_avatar` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `pro_avatar` varchar(255) DEFAULT NULL,
   `pro_view` int(11) NOT NULL DEFAULT 0,
   `pro_hot` tinyint(4) NOT NULL DEFAULT 0,
   `pro_active` tinyint(4) NOT NULL DEFAULT 1,
   `pro_pay` int(11) NOT NULL DEFAULT 0,
-  `pro_description` mediumtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `pro_content` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `pro_description` mediumtext DEFAULT NULL,
+  `pro_content` text DEFAULT NULL,
   `pro_review_total` int(11) NOT NULL DEFAULT 0,
   `pro_review_star` int(11) NOT NULL DEFAULT 0,
   `pro_age_review` int(11) NOT NULL DEFAULT 0,
@@ -518,11 +532,11 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `pro_name`, `pro_slug`, `pro_price`, `pro_price_entry`, `pro_category_id`, `pro_admin_id`, `pro_sale`, `pro_avatar`, `pro_view`, `pro_hot`, `pro_active`, `pro_pay`, `pro_description`, `pro_content`, `pro_review_total`, `pro_review_star`, `pro_age_review`, `created_at`, `pro_number`, `pro_country`, `updated_at`) VALUES
-(32, 'Mặt nhôm nguyên khối màu vàng – ED-AC', 'mat-nhom-nguyen-khoi-mau-vang-ed-ac', 155000, 0, 15, 0, 15, '2021-07-16__ed-03.jpg', 7, 0, 1, 5, NULL, '<p><strong>EDENKI DELUXE</strong></p>\r\n\r\n<p>Kế thừa n&eacute;t truyền thống trong thiết kế v&agrave; l&agrave;m nổi bật bằng chất liệu mặt viền sang trọng bằng nh&ocirc;m nguy&ecirc;n khối m&agrave;u v&agrave;ng, tạo điểm nhấn v&agrave; sự tinh tế, mới lạ cho kh&ocirc;ng gian nội thất.</p>\r\n\r\n<p>Aluminium champagne</p>\r\n\r\n<p>(Mặt nh&ocirc;m nguy&ecirc;n khối m&agrave;u v&agrave;ng champagne)</p>\r\n\r\n<p>Đ&oacute;ng g&oacute;i 20c&aacute;i/ hộp, 160 c&aacute;i/ th&ugrave;ng</p>\r\n\r\n<p><img src=\"/ckfinder/userfiles/images/image-20210716000959-1.jpeg\" style=\"height:100%; width:100%\" /></p>', 1, 5, 5, '2021-04-17 04:33:23', 5000, 15, '2021-09-01 18:42:06'),
-(33, 'Ổ cắm điện 3 ổ 1 công tắc', 'o-cam-dien-3-o-1-cong-tac', 80000, 0, 29, 0, 30, '2021-07-16__z2558068542799-a7b0ea00f2b548ce2fdd4bfcb48ad76a.jpg', 1, 0, 1, 0, NULL, '<p><a href=\"https://www.sendo.vn/shop/gongniu-viet-nam/o-cam-dien-gongniu-da-nang-4-o-4-cong-tac-cong-suat-10a2502500w-trang-chinh-hang-28358368.html?context=shop_page\"><em>Ổ cắm điện</em></a>&nbsp;Gongniu đa năng 3 ổ 1 c&ocirc;ng tắc c&aacute;ch điện bền đẹp. L&agrave; ổ cắm điện cao cấp v&agrave; c&oacute; độ an to&agrave;n cao d&ugrave;ng cho c&aacute;c thiết bị điện gia dụng, điện tử sử dụng trong nh&agrave;, trong văn ph&ograve;ng, c&aacute;c thiết bị c&oacute; gi&aacute; trị,&hellip;</p>\r\n\r\n<p><em>Ổ cắm điện</em>&nbsp;Gongniu đ&atilde; đạt được độ an to&agrave;n tối đa cho người sử dụng với 4 cấp bảo hộ:</p>\r\n\r\n<p>&ndash; Ch&acirc;n tiếp x&uacute;c với ph&iacute;ch cắm được l&agrave;m bằng l&aacute; đồng nguy&ecirc;n chất</p>\r\n\r\n<p>&ndash; 5.000 lần cắm r&uacute;t kh&ocirc;ng bị lỏng</p>\r\n\r\n<p>&ndash; Tuổi thọ sử dụng tắt mở l&ecirc;n tới 10.000 lần</p>\r\n\r\n<p>&ndash; Chịu nhiệt, chống ch&aacute;y: 750&ordm;C</p>\r\n\r\n<p>&ndash; Thời gian bảo h&agrave;nh 3 năm (36 th&aacute;ng)</p>', 0, 0, 0, '2021-04-17 04:40:48', 2000, 14, '2021-07-15 17:12:53'),
+(32, 'Mặt nhôm nguyên khối màu vàng – ED-AC', 'mat-nhom-nguyen-khoi-mau-vang-ed-ac', 155000, 0, 15, 0, 15, '2021-07-16__ed-03.jpg', 11, 0, 1, 6, NULL, '<p><strong>EDENKI DELUXE</strong></p>\r\n\r\n<p>Kế thừa n&eacute;t truyền thống trong thiết kế v&agrave; l&agrave;m nổi bật bằng chất liệu mặt viền sang trọng bằng nh&ocirc;m nguy&ecirc;n khối m&agrave;u v&agrave;ng, tạo điểm nhấn v&agrave; sự tinh tế, mới lạ cho kh&ocirc;ng gian nội thất.</p>\r\n\r\n<p>Aluminium champagne</p>\r\n\r\n<p>(Mặt nh&ocirc;m nguy&ecirc;n khối m&agrave;u v&agrave;ng champagne)</p>\r\n\r\n<p>Đ&oacute;ng g&oacute;i 20c&aacute;i/ hộp, 160 c&aacute;i/ th&ugrave;ng</p>\r\n\r\n<p><img src=\"/ckfinder/userfiles/images/image-20210716000959-1.jpeg\" style=\"height:100%; width:100%\" /></p>', 1, 5, 5, '2021-04-17 04:33:23', 5000, 15, '2021-09-01 18:42:06'),
+(33, 'Ổ cắm điện 3 ổ 1 công tắc', 'o-cam-dien-3-o-1-cong-tac', 80000, 0, 29, 0, 30, '2021-07-16__z2558068542799-a7b0ea00f2b548ce2fdd4bfcb48ad76a.jpg', 4, 0, 1, 1, NULL, '<p><a href=\"https://www.sendo.vn/shop/gongniu-viet-nam/o-cam-dien-gongniu-da-nang-4-o-4-cong-tac-cong-suat-10a2502500w-trang-chinh-hang-28358368.html?context=shop_page\"><em>Ổ cắm điện</em></a>&nbsp;Gongniu đa năng 3 ổ 1 c&ocirc;ng tắc c&aacute;ch điện bền đẹp. L&agrave; ổ cắm điện cao cấp v&agrave; c&oacute; độ an to&agrave;n cao d&ugrave;ng cho c&aacute;c thiết bị điện gia dụng, điện tử sử dụng trong nh&agrave;, trong văn ph&ograve;ng, c&aacute;c thiết bị c&oacute; gi&aacute; trị,&hellip;</p>\r\n\r\n<p><em>Ổ cắm điện</em>&nbsp;Gongniu đ&atilde; đạt được độ an to&agrave;n tối đa cho người sử dụng với 4 cấp bảo hộ:</p>\r\n\r\n<p>&ndash; Ch&acirc;n tiếp x&uacute;c với ph&iacute;ch cắm được l&agrave;m bằng l&aacute; đồng nguy&ecirc;n chất</p>\r\n\r\n<p>&ndash; 5.000 lần cắm r&uacute;t kh&ocirc;ng bị lỏng</p>\r\n\r\n<p>&ndash; Tuổi thọ sử dụng tắt mở l&ecirc;n tới 10.000 lần</p>\r\n\r\n<p>&ndash; Chịu nhiệt, chống ch&aacute;y: 750&ordm;C</p>\r\n\r\n<p>&ndash; Thời gian bảo h&agrave;nh 3 năm (36 th&aacute;ng)</p>', 0, 0, 0, '2021-04-17 04:40:48', 2000, 14, '2021-07-15 17:12:53'),
 (34, 'Mặt kính Cristal màu ngọc trai (Cristal Glass Golden) ED-CGG/ED-CGG-V', 'mat-kinh-cristal-mau-ngoc-trai-cristal-glass-golden-ed-cgged-cgg-v', 181000, 0, 16, 0, 0, '2021-07-16__ed-04.jpg', 1, 0, 1, 0, NULL, '<p>Edenki Deluxe&nbsp;</p>\r\n\r\n<p>Kế thừa n&eacute;t truyền thống trong thiết kế v&agrave; l&agrave;m nổi bật bằng những chất liệu mặt viền sang trọng như mặt k&iacute;nh Cristal m&agrave;u ngọc trai gi&uacute;p tạo điểm nhấn v&agrave; sự tinh tế, mới lạ cho kh&ocirc;ng gian nội thất.</p>\r\n\r\n<p>ED-CGG/ED-CGG-V</p>\r\n\r\n<p>Cristal Glass Golden</p>\r\n\r\n<p>Mặt k&iacute;nh Cristal m&agrave;u ngọc trai</p>\r\n\r\n<p>Ddosngs g&oacute;i 20 c&aacute;i/ hộp, 160 c&aacute;i/th&ugrave;ng.</p>\r\n\r\n<p><img src=\"/ckfinder/userfiles/images/image-20210716000838-1.jpeg\" style=\"height:937px; width:1320px\" /></p>', 0, 0, 0, '2021-04-17 04:43:14', 50, 15, '2021-07-15 17:09:14'),
 (35, 'RJ45 Cat5e jack', 'rj45-cat5e-jack', 62000, 0, 16, 0, 0, '2021-07-16__ed-c501-480x480.jpg', 0, 0, 1, 0, NULL, '<p>Edenki Deluxe&nbsp;</p>\r\n\r\n<p>Kế thừa n&eacute;t truyền thống trong thiết kế v&agrave; l&agrave;m nổi bật bằng những chất liệu mặt viền sang trọng như mặt k&iacute;nh Cristal m&agrave;u ngọc trai gi&uacute;p tạo điểm nhấn v&agrave; sự tinh tế, mới lạ cho kh&ocirc;ng gian nội thất.</p>\r\n\r\n<p>ED-CGG/ED-CGG-V</p>\r\n\r\n<p>Cristal Glass Golden</p>\r\n\r\n<p>Mặt k&iacute;nh Cristal m&agrave;u ngọc trai</p>\r\n\r\n<p>Ddosngs g&oacute;i 20 c&aacute;i/ hộp, 160 c&aacute;i/th&ugrave;ng.</p>\r\n\r\n<p><img src=\"/ckfinder/userfiles/images/image-20210716000732-1.jpeg\" style=\"height:937px; width:1320px\" /><img src=\"/ckfinder/userfiles/images/image-20210716000732-2.jpeg\" style=\"height:1080px; width:1309px\" /><img src=\"/ckfinder/userfiles/images/image-20210716000732-3.jpeg\" style=\"height:960px; width:1280px\" /><img src=\"/ckfinder/userfiles/images/image-20210716000732-4.jpeg\" style=\"height:868px; width:1280px\" /></p>\r\n\r\n<ul>\r\n	<li>\r\n	<p><a href=\"https://vinafocus.com/mat-kinh-cristal-mau-ngoc-trai--cristal-glass-golden--ed-cgg-ed-cgg-v#Description\">Chi Tiết Sản Phẩm</a></p>\r\n	</li>\r\n</ul>', 0, 0, 0, '2021-04-17 04:54:18', 0, 15, '2021-07-15 17:08:09'),
-(36, 'Đèn LED T8 Tube Thủy Tinh Opple', 'den-led-t8-tube-thuy-tinh-opple', 150000, 0, 21, 0, 20, '2021-07-16__u-tube-1.jpg', 1, 1, 1, 0, NULL, '<h2>Đ&egrave;n LED T8 Tube Thủy Tinh Opple</h2>\r\n\r\n<p>Lợi &iacute;ch:</p>\r\n\r\n<p>&ndash; &Aacute;nh s&aacute;ng m&ocirc;i trường xung quanh miễn ph&iacute;<br />\r\n&ndash; Tiết kiệm tới 60% năng lượng so với ống T8 truyền thống<br />\r\n&ndash; Tiết kiệm hơn 2 lần so với ống T8 th&ocirc;ng thường với hệ thống điện từ</p>\r\n\r\n<p>T&iacute;nh năng, đặc điểm:</p>\r\n\r\n<p>&ndash; Tr&igrave;nh điều khiển miễn ph&iacute; kh&ocirc;ng nhấp nh&aacute;y<br />\r\n&ndash; Tiết kiệm năng lượng<br />\r\n&ndash; Tuổi thọ, c&agrave;i đặt v&agrave; qu&ecirc;n l&acirc;u</p>', 0, 0, 0, '2021-04-17 04:57:04', 250, 16, '2021-07-15 17:05:16'),
+(36, 'Đèn LED T8 Tube Thủy Tinh Opple', 'den-led-t8-tube-thuy-tinh-opple', 150000, 0, 21, 0, 20, '2021-07-16__u-tube-1.jpg', 2, 1, 1, 0, NULL, '<h2>Đ&egrave;n LED T8 Tube Thủy Tinh Opple</h2>\r\n\r\n<p>Lợi &iacute;ch:</p>\r\n\r\n<p>&ndash; &Aacute;nh s&aacute;ng m&ocirc;i trường xung quanh miễn ph&iacute;<br />\r\n&ndash; Tiết kiệm tới 60% năng lượng so với ống T8 truyền thống<br />\r\n&ndash; Tiết kiệm hơn 2 lần so với ống T8 th&ocirc;ng thường với hệ thống điện từ</p>\r\n\r\n<p>T&iacute;nh năng, đặc điểm:</p>\r\n\r\n<p>&ndash; Tr&igrave;nh điều khiển miễn ph&iacute; kh&ocirc;ng nhấp nh&aacute;y<br />\r\n&ndash; Tiết kiệm năng lượng<br />\r\n&ndash; Tuổi thọ, c&agrave;i đặt v&agrave; qu&ecirc;n l&acirc;u</p>', 0, 0, 0, '2021-04-17 04:57:04', 250, 16, '2021-07-15 17:05:16'),
 (37, 'Đèn LED Nến Vỏ Vàng LED1 Opple', 'den-led-nen-vo-vang-led1-opple', 102000, 0, 21, 0, 10, '2021-07-16__led-utility1-candle-b-1.jpg', 0, 1, 1, 0, NULL, '<h2>Đ&egrave;n LED Nến Vỏ V&agrave;ng LED1 Opple</h2>\r\n\r\n<p>Lợi &iacute;ch:</p>\r\n\r\n<p>&ndash; L&yacute; tưởng để sử dụng trong đ&egrave;n ch&ugrave;m, tạo ra hiệu ứng lấp l&aacute;nh đẹp<br />\r\n&ndash; Dễ d&agrave;ng kết hợp m&agrave;u sắc v&acirc;n v&acirc;n<br />\r\n&ndash; Tiết kiệm tới 85% năng lượng so với nến s&aacute;ng</p>\r\n\r\n<p>T&iacute;nh năng, đặc điểm:</p>\r\n\r\n<p>&ndash; &Aacute;nh s&aacute;ng ph&aacute;t ra qua lăng k&iacute;nh lăng k&iacute;nh<br />\r\n&ndash; Lựa chọn m&agrave;u v&agrave;ng bạc<br />\r\n&ndash; Tiết kiệm năng lượng</p>', 0, 0, 0, '2021-04-17 04:58:18', 5000, 16, '2021-07-15 17:04:28'),
 (38, 'Đèn LED bulb hiệu chỉnh Opple', 'den-led-bulb-hieu-chinh-opple', 60000, 0, 21, 0, 20, '2021-07-16__led-bulbs-b.jpg', 0, 1, 1, 0, NULL, '<h2>Đ&egrave;n LED bulb hiệu chỉnh Opple</h2>\r\n\r\n<p>Lợi &iacute;ch:</p>\r\n\r\n<p>&ndash; Kiểm so&aacute;t dễ d&agrave;ng bằng c&aacute;ch chuyển đổi v&agrave; kh&ocirc;ng cần bất kỳ ứng dụng hoặc điều khiển từ xa.<br />\r\n&ndash; C&oacute; tuổi thọ cao hơn 20 lần so với b&oacute;ng đ&egrave;n sợi đốt, l&ecirc;n đến 20 năm tuổi thọ<br />\r\n&ndash; Tiết kiệm 85% năng lượng so với b&oacute;ng đ&egrave;n sợi đốt, 40% so với b&oacute;ng đ&egrave;n CFL</p>\r\n\r\n<p>T&iacute;nh năng, đặc điểm:</p>\r\n\r\n<p>&ndash; Thay đổi CCT từ 6000K đến 3000K v&agrave; 4000K bằng c&aacute;ch bật / tắt?<br />\r\n&ndash; Tuổi thọ d&agrave;i, c&agrave;i đặt v&agrave; qu&ecirc;n<br />\r\n&ndash; Năng lượng điện tử</p>', 0, 0, 0, '2021-04-17 04:59:54', 500, 16, '2021-07-15 17:03:34'),
 (39, 'Đèn LED Bulb EcoMax Bulb Dim Opple', 'den-led-bulb-ecomax-bulb-dim-opple', 48000, 0, 21, 0, 10, '2021-07-16__led-ecomax-bulb-dim-b-0-0.jpg', 2, 1, 1, 0, NULL, '<h2>Đ&egrave;n LED Bulb EcoMax Bulb Dim Opple</h2>\r\n\r\n<p>Lợi &iacute;ch:</p>\r\n\r\n<p>&ndash; Điều chỉnh cường độ &aacute;nh s&aacute;ng ph&ugrave; hợp với m&ocirc;i trường hoặc thời gian trong ng&agrave;y<br />\r\n&ndash; &Aacute;nh s&aacute;ng bạn cần<br />\r\n&ndash; Dễ d&agrave;ng trang bị lại c&aacute;c đồ đạc th&ocirc;ng thường với LED<br />\r\n&ndash; Tiết kiệm năng lượng tới 80% so với b&oacute;ng đ&egrave;n sợi đốt, 35% so với b&oacute;ng đ&egrave;n CFL</p>\r\n\r\n<p>T&iacute;nh năng, đặc điểm:</p>\r\n\r\n<p>&ndash; C&oacute; thể thay đổi độ s&aacute;ng từ 10-100%<br />\r\n&ndash; G&oacute;c &aacute;nh s&aacute;ng rộng tới 300 &deg;<br />\r\n&ndash;&nbsp;Chiều&nbsp;rộng wattages v&agrave; mũ<br />\r\n&ndash; Hiệu&nbsp;suất&nbsp;năng lượng</p>', 0, 0, 0, '2021-04-17 05:02:14', 0, 16, '2021-07-15 17:02:43'),
@@ -530,13 +544,13 @@ INSERT INTO `products` (`id`, `pro_name`, `pro_slug`, `pro_price`, `pro_price_en
 (41, 'Bộ công tắc đơn 20A-EC-120', 'bo-cong-tac-don-20a-ec-120', 166000, 0, 15, 0, 10, '2021-07-15__ec-120.jpg', 0, 0, 1, 0, NULL, '<p>-Thiết bị điện Edenki Hạt c&ocirc;ng tắc đơn 20A Edenki EC-120</p>\r\n\r\n<p>- Thiết kế của Đức</p>\r\n\r\n<p>- Đạt ti&ecirc;u chuẩn chất lượng ISO9001, CE, IEC</p>\r\n\r\n<p>- C&ocirc;ng nghệ, quy tr&igrave;nh sản xuất từ Nhật - Bảo H&agrave;nh 15 năm</p>\r\n\r\n<p>- Giao h&agrave;ng nhanh ch&oacute;ng</p>\r\n\r\n<p>- Chống ch&aacute;y, Ngăn r&ograve; rỉ điện, Kh&oacute;a trẻ em an to&agrave;n</p>', 0, 0, 0, '2021-04-17 05:05:43', 5100, 0, '2021-07-15 16:46:16'),
 (42, 'Bộ công tắc dimmer 630KW - EC - D630', 'bo-cong-tac-dimmer-630kw-ec-d630', 29000, 0, 15, 0, 0, '2021-07-15__ec-d630.jpg', 1, 0, 1, 0, NULL, '<p>Master dimmer light 630W</p>\r\n\r\n<p>(Bộ c&ocirc;ng tắc dimmer 630W)</p>\r\n\r\n<p>Đ&oacute;ng g&oacute;i 6 c&aacute;i/ hộp, 60 c&aacute;i/ th&ugrave;ng</p>', 0, 0, 0, '2021-04-17 05:19:50', 500, 22, '2021-07-15 16:45:17'),
 (43, 'Bộ công tắc trung gian đơn màu trắng - EC - 301', 'bo-cong-tac-trung-gian-don-mau-trang-ec-301', 132000, 0, 15, 0, 0, '2021-07-15__ec-301.jpg', 0, 0, 1, 0, NULL, '<p>💡Thiết kế của Đức</p>\r\n\r\n<p>💡C&ocirc;ng nghệ, quy tr&igrave;nh sản xuất từ Nhật</p>\r\n\r\n<p>💡Đạt ti&ecirc;u chuẩn chất lượng ISO9001, CE, IEC</p>\r\n\r\n<p>💡Bảo H&agrave;nh 15 năm</p>\r\n\r\n<p>💡Chống ch&aacute;y, Ngăn r&ograve; rỉ điện, Kh&oacute;a trẻ em an to&agrave;n</p>\r\n\r\n<p>💡Giao h&agrave;ng nhanh ch&oacute;ng</p>', 0, 0, 0, '2021-04-17 05:20:42', 500, 22, '2021-07-15 16:44:26'),
-(44, 'Bộ cắm điện thoại đơn - EC -T01', 'bo-cam-dien-thoai-don-ec-t01', 103000, 0, 15, 0, 0, '2021-07-15__ec-t01.jpg', 1, 0, 1, 0, NULL, '<p>RJ11 phone jack</p>\r\n\r\n<p>(Bộ ổ cắm điện thoại đơn)</p>\r\n\r\n<p>Đ&oacute;ng g&oacute;i 8 c&aacute;i/ hộp, 80 c&aacute;i/ th&ugrave;ng</p>', 0, 0, 0, '2021-04-17 05:21:31', 500, 22, '2021-07-15 16:41:51'),
+(44, 'Bộ cắm điện thoại đơn - EC -T01', 'bo-cam-dien-thoai-don-ec-t01', 103000, 0, 15, 0, 0, '2021-07-15__ec-t01.jpg', 2, 0, 1, 0, NULL, '<p>RJ11 phone jack</p>\r\n\r\n<p>(Bộ ổ cắm điện thoại đơn)</p>\r\n\r\n<p>Đ&oacute;ng g&oacute;i 8 c&aacute;i/ hộp, 80 c&aacute;i/ th&ugrave;ng</p>', 0, 0, 0, '2021-04-17 05:21:31', 500, 22, '2021-07-15 16:41:51'),
 (45, 'Bộ công tắc ba 2 chiều - EC - 203', 'bo-cong-tac-ba-2-chieu-ec-203', 162000, 0, 15, 0, 0, '2021-07-15__ec-203.jpg', 2, 0, 1, 0, NULL, '<p>2-Way Switch 3 Module</p>\r\n\r\n<p>(Bộ c&ocirc;ng tắc ba 2 chiều)</p>\r\n\r\n<p>Đ&oacute;ng g&oacute;i 8 c&aacute;i/ hộp, 80 c&aacute;i/ th&ugrave;ng</p>', 0, 0, 0, '2021-04-17 05:22:20', 0, 22, '2021-07-15 16:40:37'),
 (46, 'Bộ cắm mạng/tivi - EC - C5TV02', 'bo-cam-mangtivi-ec-c5tv02', 137000, 0, 15, 0, 0, '2021-07-15__ec-c5tv02.jpg', 2, 0, 1, 0, NULL, '<p>💡Thiết kế của Đức</p>\r\n\r\n<p>💡C&ocirc;ng nghệ, quy tr&igrave;nh sản xuất từ Nhật</p>\r\n\r\n<p>💡Đạt ti&ecirc;u chuẩn chất lượng ISO9001, CE, IEC</p>\r\n\r\n<p>💡Bảo H&agrave;nh 15 năm</p>\r\n\r\n<p>💡Chống ch&aacute;y, Ngăn r&ograve; rỉ điện, Kh&oacute;a trẻ em an to&agrave;n</p>\r\n\r\n<p>💡Giao h&agrave;ng nhanh ch&oacute;ng</p>', 0, 0, 0, '2021-04-17 05:23:37', 10, 22, '2021-07-15 16:39:44'),
-(47, 'Bộ công tắc bốn 2 chiều - EC240', 'bo-cong-tac-bon-2-chieu-ec240', 177000, 0, 15, 0, 0, '2021-07-15__ec-204.jpg', 4, 0, 1, 0, NULL, '<p style=\"text-align:justify\"><span style=\"font-size:16px\"><span style=\"color:#333e48\"><span style=\"font-family:&quot;Open Sans&quot;,Helvetica,Arial,sans-serif\"><span style=\"background-color:#ffffff\"><span style=\"font-family:Muli\"><span style=\"color:#000000\">- Kiểu d&aacute;ng: h&igrave;nh vu&ocirc;ng</span></span></span></span></span></span></p>\r\n\r\n<p style=\"text-align:justify\"><span style=\"font-size:16px\"><span style=\"color:#333e48\"><span style=\"font-family:&quot;Open Sans&quot;,Helvetica,Arial,sans-serif\"><span style=\"background-color:#ffffff\"><span style=\"color:#000000\"><span style=\"font-size:14px\"><span style=\"font-family:Muli\">- D&ograve;ng điện định mức: 16A</span></span></span></span></span></span></span></p>\r\n\r\n<p style=\"text-align:justify\"><span style=\"font-size:16px\"><span style=\"color:#333e48\"><span style=\"font-family:&quot;Open Sans&quot;,Helvetica,Arial,sans-serif\"><span style=\"background-color:#ffffff\"><span style=\"color:#000000\"><span style=\"font-size:14px\"><span style=\"font-family:Muli\">- Điện &aacute;p định mức: 250VAC</span></span></span></span></span></span></span></p>\r\n\r\n<p style=\"text-align:justify\"><span style=\"font-size:16px\"><span style=\"color:#333e48\"><span style=\"font-family:&quot;Open Sans&quot;,Helvetica,Arial,sans-serif\"><span style=\"background-color:#ffffff\"><span style=\"color:#000000\"><span style=\"font-size:14px\"><span style=\"font-family:Muli\">- Bộ 4 c&ocirc;ng tắc E, 2 chiều, cắm nhanh</span></span></span></span></span></span></span></p>\r\n\r\n<p style=\"text-align:justify\"><span style=\"font-size:16px\"><span style=\"color:#333e48\"><span style=\"font-family:&quot;Open Sans&quot;,Helvetica,Arial,sans-serif\"><span style=\"background-color:#ffffff\"><span style=\"color:#000000\"><span style=\"font-size:14px\"><span style=\"font-family:Muli\">- M&agrave;u sắc: m&agrave;u trắng</span></span></span></span></span></span></span></p>\r\n\r\n<p style=\"text-align:justify\"><span style=\"font-size:16px\"><span style=\"color:#333e48\"><span style=\"font-family:&quot;Open Sans&quot;,Helvetica,Arial,sans-serif\"><span style=\"background-color:#ffffff\"><span style=\"color:#000000\"><span style=\"font-size:14px\"><span style=\"font-family:Muli\">- Ti&ecirc;u chuẩn: JIS Japan</span></span></span></span></span></span></span></p>\r\n\r\n<p style=\"text-align:justify\"><span style=\"font-size:16px\"><span style=\"color:#333e48\"><span style=\"font-family:&quot;Open Sans&quot;,Helvetica,Arial,sans-serif\"><span style=\"background-color:#ffffff\"><span style=\"color:#000000\"><span style=\"font-size:14px\"><span style=\"font-family:Muli\">- Bề mặt mượt m&agrave;</span></span></span></span></span></span></span></p>\r\n\r\n<p style=\"text-align:justify\"><span style=\"font-size:16px\"><span style=\"color:#333e48\"><span style=\"font-family:&quot;Open Sans&quot;,Helvetica,Arial,sans-serif\"><span style=\"background-color:#ffffff\"><span style=\"color:#000000\"><span style=\"font-size:14px\"><span style=\"font-family:Muli\">- H&agrave;i ho&agrave; khi kết hợp với mọi kh&ocirc;ng gian</span></span></span></span></span></span></span></p>\r\n\r\n<p style=\"text-align:justify\"><span style=\"font-size:16px\"><span style=\"color:#333e48\"><span style=\"font-family:&quot;Open Sans&quot;,Helvetica,Arial,sans-serif\"><span style=\"background-color:#ffffff\"><span style=\"color:#000000\"><span style=\"font-size:14px\"><span style=\"font-family:Muli\">- Mặt tiếp x&uacute;c lớn, kh&ocirc;ng viền gi&uacute;p người lớn tuổi dễ d&agrave;ng sử dụng.</span></span></span></span></span></span></span></p>\r\n\r\n<p style=\"text-align:left\"><span style=\"font-size:16px\"><span style=\"color:#333e48\"><span style=\"font-family:&quot;Open Sans&quot;,Helvetica,Arial,sans-serif\"><span style=\"background-color:#ffffff\"><span style=\"font-size:14px\"><span style=\"font-family:Muli\"><span style=\"color:#000000\">C&ocirc;ng tắc ổ cắm d&ograve;ng Mineva ng&agrave;y c&agrave;ng trở n&ecirc;n th&ocirc;ng d&ugrave;ng v&agrave; gần gũi hơn với người d&ugrave;ng Việt. Dễ d&agrave;ng bắt gặp c&aacute;c d&ograve;ng c&ocirc;ng tắc ổ cắm Mineva tại những căn hộ mới x&acirc;y hoặc đang được tr&ugrave;ng tu x&acirc;y mới.</span></span></span></span></span></span></span></p>', 1, 5, 5, '2021-04-17 05:25:13', 100, 22, '2021-07-15 16:37:55'),
+(47, 'Bộ công tắc bốn 2 chiều - EC240', 'bo-cong-tac-bon-2-chieu-ec240', 177000, 0, 15, 0, 0, '2021-07-15__ec-204.jpg', 5, 0, 1, 0, NULL, '<p style=\"text-align:justify\"><span style=\"font-size:16px\"><span style=\"color:#333e48\"><span style=\"font-family:&quot;Open Sans&quot;,Helvetica,Arial,sans-serif\"><span style=\"background-color:#ffffff\"><span style=\"font-family:Muli\"><span style=\"color:#000000\">- Kiểu d&aacute;ng: h&igrave;nh vu&ocirc;ng</span></span></span></span></span></span></p>\r\n\r\n<p style=\"text-align:justify\"><span style=\"font-size:16px\"><span style=\"color:#333e48\"><span style=\"font-family:&quot;Open Sans&quot;,Helvetica,Arial,sans-serif\"><span style=\"background-color:#ffffff\"><span style=\"color:#000000\"><span style=\"font-size:14px\"><span style=\"font-family:Muli\">- D&ograve;ng điện định mức: 16A</span></span></span></span></span></span></span></p>\r\n\r\n<p style=\"text-align:justify\"><span style=\"font-size:16px\"><span style=\"color:#333e48\"><span style=\"font-family:&quot;Open Sans&quot;,Helvetica,Arial,sans-serif\"><span style=\"background-color:#ffffff\"><span style=\"color:#000000\"><span style=\"font-size:14px\"><span style=\"font-family:Muli\">- Điện &aacute;p định mức: 250VAC</span></span></span></span></span></span></span></p>\r\n\r\n<p style=\"text-align:justify\"><span style=\"font-size:16px\"><span style=\"color:#333e48\"><span style=\"font-family:&quot;Open Sans&quot;,Helvetica,Arial,sans-serif\"><span style=\"background-color:#ffffff\"><span style=\"color:#000000\"><span style=\"font-size:14px\"><span style=\"font-family:Muli\">- Bộ 4 c&ocirc;ng tắc E, 2 chiều, cắm nhanh</span></span></span></span></span></span></span></p>\r\n\r\n<p style=\"text-align:justify\"><span style=\"font-size:16px\"><span style=\"color:#333e48\"><span style=\"font-family:&quot;Open Sans&quot;,Helvetica,Arial,sans-serif\"><span style=\"background-color:#ffffff\"><span style=\"color:#000000\"><span style=\"font-size:14px\"><span style=\"font-family:Muli\">- M&agrave;u sắc: m&agrave;u trắng</span></span></span></span></span></span></span></p>\r\n\r\n<p style=\"text-align:justify\"><span style=\"font-size:16px\"><span style=\"color:#333e48\"><span style=\"font-family:&quot;Open Sans&quot;,Helvetica,Arial,sans-serif\"><span style=\"background-color:#ffffff\"><span style=\"color:#000000\"><span style=\"font-size:14px\"><span style=\"font-family:Muli\">- Ti&ecirc;u chuẩn: JIS Japan</span></span></span></span></span></span></span></p>\r\n\r\n<p style=\"text-align:justify\"><span style=\"font-size:16px\"><span style=\"color:#333e48\"><span style=\"font-family:&quot;Open Sans&quot;,Helvetica,Arial,sans-serif\"><span style=\"background-color:#ffffff\"><span style=\"color:#000000\"><span style=\"font-size:14px\"><span style=\"font-family:Muli\">- Bề mặt mượt m&agrave;</span></span></span></span></span></span></span></p>\r\n\r\n<p style=\"text-align:justify\"><span style=\"font-size:16px\"><span style=\"color:#333e48\"><span style=\"font-family:&quot;Open Sans&quot;,Helvetica,Arial,sans-serif\"><span style=\"background-color:#ffffff\"><span style=\"color:#000000\"><span style=\"font-size:14px\"><span style=\"font-family:Muli\">- H&agrave;i ho&agrave; khi kết hợp với mọi kh&ocirc;ng gian</span></span></span></span></span></span></span></p>\r\n\r\n<p style=\"text-align:justify\"><span style=\"font-size:16px\"><span style=\"color:#333e48\"><span style=\"font-family:&quot;Open Sans&quot;,Helvetica,Arial,sans-serif\"><span style=\"background-color:#ffffff\"><span style=\"color:#000000\"><span style=\"font-size:14px\"><span style=\"font-family:Muli\">- Mặt tiếp x&uacute;c lớn, kh&ocirc;ng viền gi&uacute;p người lớn tuổi dễ d&agrave;ng sử dụng.</span></span></span></span></span></span></span></p>\r\n\r\n<p style=\"text-align:left\"><span style=\"font-size:16px\"><span style=\"color:#333e48\"><span style=\"font-family:&quot;Open Sans&quot;,Helvetica,Arial,sans-serif\"><span style=\"background-color:#ffffff\"><span style=\"font-size:14px\"><span style=\"font-family:Muli\"><span style=\"color:#000000\">C&ocirc;ng tắc ổ cắm d&ograve;ng Mineva ng&agrave;y c&agrave;ng trở n&ecirc;n th&ocirc;ng d&ugrave;ng v&agrave; gần gũi hơn với người d&ugrave;ng Việt. Dễ d&agrave;ng bắt gặp c&aacute;c d&ograve;ng c&ocirc;ng tắc ổ cắm Mineva tại những căn hộ mới x&acirc;y hoặc đang được tr&ugrave;ng tu x&acirc;y mới.</span></span></span></span></span></span></span></p>', 1, 5, 5, '2021-04-17 05:25:13', 100, 22, '2021-07-15 16:37:55'),
 (48, 'Đèn LED Downlight EcoMax Opple', 'den-led-downlight-ecomax-opple', 300000, 0, 22, 0, 0, '2021-07-16__led-slim-downlight-ecomax-247x296.jpg', 1, 0, 1, 0, NULL, '<ul>\r\n	<li>C&ocirc;ng suất : 18w</li>\r\n	<li>Quang th&ocirc;ng : 1200lm</li>\r\n	<li>Ho&agrave;n m&agrave;u : 80Ra</li>\r\n	<li>Lỗ Kho&eacute;t : 200mm</li>\r\n	<li>Nhiệt độ m&agrave;u : 3000k &ndash; 4000k &ndash; 6000k</li>\r\n</ul>', 0, 0, 0, '2021-07-16 13:24:28', 40, 22, '2021-07-16 13:29:14'),
-(49, 'Đèn led downlight Utility 12W R150 OPPLE', 'den-led-downlight-utility-12w-r150-opple', 130000, 0, 22, 0, 0, '2021-07-16__.jpg', 0, 0, 1, 0, NULL, '<h3>Th&ocirc;ng số kĩ thuật :&nbsp;</h3>\r\n\r\n<ul>\r\n	<li>C&ocirc;ng suất : 12w</li>\r\n	<li>Quang th&ocirc;ng : 800lm</li>\r\n	<li>Ho&agrave;n m&agrave;u : 80Ra</li>\r\n	<li>Lỗ Kho&eacute;t : 160mm</li>\r\n	<li>Nhiệt độ m&agrave;u : 3000k &ndash; 4000k &ndash; 6000k</li>\r\n</ul>', 0, 0, 0, '2021-07-16 13:25:56', 30, 22, '2021-07-16 13:29:03'),
-(50, 'Máy lạnh Panasonic 1.5 HP CU/CS-N12WKH-8M', 'may-lanh-panasonic-15-hp-cucs-n12wkh-8m', 11590000, 0, 22, 0, 5, '2022-08-02__10045217-may-lanh-panasonic-1-5-hp-cu-cs-n12wkh-8m.jpg', 6, 0, 1, 3, '<ul>\r\n	<li>C&ocirc;ng nghệ lọc nanoe-G loại bỏ bụi nhỏ như PM2.5 hiệu quả</li>\r\n	<li>Chế độ Powerful cho khả năng l&agrave;m lạnh nhanh ngay tức th&igrave;</li>\r\n	<li>Chức năng h&uacute;t ẩm tạo kh&ocirc;ng gian kh&ocirc; r&aacute;o cho căn ph&ograve;ng</li>\r\n	<li>M&ocirc;i chất lạnh R-32 th&acirc;n thiện m&ocirc;i trường, bảo vệ sức khỏe</li>\r\n	<li>Hẹn giờ bật tắt tự động gi&uacute;p kiểm so&aacute;t thời gian tiện lợi</li>\r\n</ul>', '<h3>Thiết kế hiện đại, sang trọng</h3>\r\n\r\n<p><strong><a href=\"https://www.nguyenkim.com/may-lanh-panasonic/\">M&aacute;y lạnh Panasonic</a>&nbsp;1.5 HP CU/CS-N12WKH-8M</strong>&nbsp;c&oacute; thiết kế đơn giản, t&ocirc;ng m&agrave;u trắng hiện đại với c&aacute;c đường bo cong mềm mại&nbsp;mang đến vẻ sang trọng cho kh&ocirc;ng gian nội thất gia đ&igrave;nh bạn. M&aacute;y c&oacute;&nbsp;<a href=\"https://www.nguyenkim.com/may-lanh/?utm_term=%C4%91i%E1%BB%81u+h%C3%B2a+gi%C3%A1+r%E1%BA%BB&amp;utm_content=19509594&amp;features_hash=70-5976\">c&ocirc;ng suất l&agrave;m m&aacute;t 1.5 HP</a>, ph&ugrave; hợp cho c&aacute;c ph&ograve;ng c&oacute; diện t&iacute;ch từ 15 - 20m2 như ph&ograve;ng ngủ, ph&ograve;ng studio nhỏ.</p>\r\n\r\n<p><img alt=\"Thiết kế hiện đại\" src=\"https://cdn.nguyenkimmall.com/images/companies/_1/Content/dien-lanh/tu-lanh/Panasonic/may-lanh-panasonic-1.5-hp-cu-cs-n12wkh-8m-thiet-ke-hien-dai-sang-trong.png\" style=\"height:100%; width:100%\" /></p>\r\n\r\n<h3>C&ocirc;ng nghệ Nanoe-G lọc sạch bụi</h3>\r\n\r\n<p>Panasonic trang bị cho chiếc&nbsp;<a href=\"https://www.nguyenkim.com/may-lanh/\">m&aacute;y lạnh</a>&nbsp;c&ocirc;ng nghệ Nanoe-G gi&uacute;p lọc sạch bụi bẩn, mang đến bầu kh&ocirc;ng kh&iacute; trong l&agrave;nh. Nanoe-G giải ph&oacute;ng c&aacute;c hạt ion &acirc;m gi&uacute;p gắn kết c&aacute;c hạt bụi trong kh&ocirc;ng kh&iacute; v&agrave;o ống nạp kh&iacute; của m&aacute;y lạnh. Tại đ&oacute; mang lọc mang điện t&iacute;ch dương sẽ giữ những hạt bụi điện t&iacute;ch &acirc;m n&agrave;y lại v&agrave; v&ocirc; hiệu ho&aacute;, kể cả hạt bụi mịn nhỏ PM2.5, trả lại kh&ocirc;ng gian sạch sẽ, bảo đảm an to&agrave;n cho sức khoẻ gia đ&igrave;nh bạn.</p>\r\n\r\n<p><img alt=\"Công nghệ nanoe-G\" src=\"https://cdn.nguyenkimmall.com/images/companies/_1/Tin_tuc/Thuy/4311628_Cover_2048x1267.jpg\" style=\"height:100%; width:100%\" /></p>', 1, 1, 1, '2021-07-16 13:26:57', 500, 22, '2022-08-02 14:38:00');
+(49, 'Đèn led downlight Utility 12W R150 OPPLE', 'den-led-downlight-utility-12w-r150-opple', 130000, 0, 22, 0, 0, '2021-07-16__.jpg', 2, 0, 1, 1, NULL, '<h3>Th&ocirc;ng số kĩ thuật :&nbsp;</h3>\r\n\r\n<ul>\r\n	<li>C&ocirc;ng suất : 12w</li>\r\n	<li>Quang th&ocirc;ng : 800lm</li>\r\n	<li>Ho&agrave;n m&agrave;u : 80Ra</li>\r\n	<li>Lỗ Kho&eacute;t : 160mm</li>\r\n	<li>Nhiệt độ m&agrave;u : 3000k &ndash; 4000k &ndash; 6000k</li>\r\n</ul>', 0, 0, 0, '2021-07-16 13:25:56', 30, 22, '2021-07-16 13:29:03'),
+(50, 'Máy lạnh Panasonic 1.5 HP CU/CS-N12WKH-8M', 'may-lanh-panasonic-15-hp-cucs-n12wkh-8m', 11590000, 0, 22, 0, 5, '2022-08-02__10045217-may-lanh-panasonic-1-5-hp-cu-cs-n12wkh-8m.jpg', 9, 0, 1, 4, '<ul>\r\n	<li>C&ocirc;ng nghệ lọc nanoe-G loại bỏ bụi nhỏ như PM2.5 hiệu quả</li>\r\n	<li>Chế độ Powerful cho khả năng l&agrave;m lạnh nhanh ngay tức th&igrave;</li>\r\n	<li>Chức năng h&uacute;t ẩm tạo kh&ocirc;ng gian kh&ocirc; r&aacute;o cho căn ph&ograve;ng</li>\r\n	<li>M&ocirc;i chất lạnh R-32 th&acirc;n thiện m&ocirc;i trường, bảo vệ sức khỏe</li>\r\n	<li>Hẹn giờ bật tắt tự động gi&uacute;p kiểm so&aacute;t thời gian tiện lợi</li>\r\n</ul>', '<h3>Thiết kế hiện đại, sang trọng</h3>\r\n\r\n<p><strong><a href=\"https://www.nguyenkim.com/may-lanh-panasonic/\">M&aacute;y lạnh Panasonic</a>&nbsp;1.5 HP CU/CS-N12WKH-8M</strong>&nbsp;c&oacute; thiết kế đơn giản, t&ocirc;ng m&agrave;u trắng hiện đại với c&aacute;c đường bo cong mềm mại&nbsp;mang đến vẻ sang trọng cho kh&ocirc;ng gian nội thất gia đ&igrave;nh bạn. M&aacute;y c&oacute;&nbsp;<a href=\"https://www.nguyenkim.com/may-lanh/?utm_term=%C4%91i%E1%BB%81u+h%C3%B2a+gi%C3%A1+r%E1%BA%BB&amp;utm_content=19509594&amp;features_hash=70-5976\">c&ocirc;ng suất l&agrave;m m&aacute;t 1.5 HP</a>, ph&ugrave; hợp cho c&aacute;c ph&ograve;ng c&oacute; diện t&iacute;ch từ 15 - 20m2 như ph&ograve;ng ngủ, ph&ograve;ng studio nhỏ.</p>\r\n\r\n<p><img alt=\"Thiết kế hiện đại\" src=\"https://cdn.nguyenkimmall.com/images/companies/_1/Content/dien-lanh/tu-lanh/Panasonic/may-lanh-panasonic-1.5-hp-cu-cs-n12wkh-8m-thiet-ke-hien-dai-sang-trong.png\" style=\"height:100%; width:100%\" /></p>\r\n\r\n<h3>C&ocirc;ng nghệ Nanoe-G lọc sạch bụi</h3>\r\n\r\n<p>Panasonic trang bị cho chiếc&nbsp;<a href=\"https://www.nguyenkim.com/may-lanh/\">m&aacute;y lạnh</a>&nbsp;c&ocirc;ng nghệ Nanoe-G gi&uacute;p lọc sạch bụi bẩn, mang đến bầu kh&ocirc;ng kh&iacute; trong l&agrave;nh. Nanoe-G giải ph&oacute;ng c&aacute;c hạt ion &acirc;m gi&uacute;p gắn kết c&aacute;c hạt bụi trong kh&ocirc;ng kh&iacute; v&agrave;o ống nạp kh&iacute; của m&aacute;y lạnh. Tại đ&oacute; mang lọc mang điện t&iacute;ch dương sẽ giữ những hạt bụi điện t&iacute;ch &acirc;m n&agrave;y lại v&agrave; v&ocirc; hiệu ho&aacute;, kể cả hạt bụi mịn nhỏ PM2.5, trả lại kh&ocirc;ng gian sạch sẽ, bảo đảm an to&agrave;n cho sức khoẻ gia đ&igrave;nh bạn.</p>\r\n\r\n<p><img alt=\"Công nghệ nanoe-G\" src=\"https://cdn.nguyenkimmall.com/images/companies/_1/Tin_tuc/Thuy/4311628_Cover_2048x1267.jpg\" style=\"height:100%; width:100%\" /></p>', 1, 1, 1, '2021-07-16 13:26:57', 500, 22, '2022-08-02 14:38:00');
 
 -- --------------------------------------------------------
 
@@ -587,8 +601,8 @@ INSERT INTO `products_keywords` (`id`, `pk_product_id`, `pk_keyword_id`) VALUES
 
 CREATE TABLE `product_images` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `pi_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `pi_slug` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `pi_name` varchar(255) DEFAULT NULL,
+  `pi_slug` varchar(255) DEFAULT NULL,
   `pi_product_id` int(11) NOT NULL DEFAULT 0,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -606,7 +620,7 @@ CREATE TABLE `ratings` (
   `r_product_id` int(11) NOT NULL DEFAULT 0,
   `r_number` tinyint(4) NOT NULL DEFAULT 0,
   `r_status` tinyint(4) NOT NULL DEFAULT 0,
-  `r_content` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `r_content` text DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -628,9 +642,9 @@ INSERT INTO `ratings` (`id`, `r_user_id`, `r_product_id`, `r_number`, `r_status`
 
 CREATE TABLE `slides` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `sd_title` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `sd_link` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `sd_image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `sd_title` varchar(255) DEFAULT NULL,
+  `sd_link` varchar(255) DEFAULT NULL,
+  `sd_image` varchar(255) DEFAULT NULL,
   `sd_target` tinyint(4) NOT NULL DEFAULT 1,
   `sd_active` tinyint(4) NOT NULL DEFAULT 1,
   `sd_sort` tinyint(4) NOT NULL DEFAULT 1,
@@ -654,11 +668,11 @@ INSERT INTO `slides` (`id`, `sd_title`, `sd_link`, `sd_image`, `sd_target`, `sd_
 
 CREATE TABLE `statics` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `s_title` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `s_slug` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `s_title` varchar(255) DEFAULT NULL,
+  `s_slug` varchar(255) DEFAULT NULL,
   `s_type` tinyint(4) NOT NULL DEFAULT 0,
-  `s_md5` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `s_content` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `s_md5` varchar(255) DEFAULT NULL,
+  `s_content` text DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -683,16 +697,16 @@ CREATE TABLE `transactions` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `tst_user_id` int(11) NOT NULL DEFAULT 0,
   `tst_total_money` int(11) NOT NULL DEFAULT 0,
-  `tst_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `tst_email` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `tst_phone` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `tst_address` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `tst_note` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `tst_name` varchar(255) DEFAULT NULL,
+  `tst_email` varchar(255) DEFAULT NULL,
+  `tst_phone` varchar(255) DEFAULT NULL,
+  `tst_address` varchar(255) DEFAULT NULL,
+  `tst_note` varchar(255) DEFAULT NULL,
   `tst_status` tinyint(4) NOT NULL DEFAULT 1,
   `tst_type` tinyint(4) NOT NULL DEFAULT 1 COMMENT ' 1 thanh toan thuong, 2 la thanh toan online',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `tst_code` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL
+  `tst_code` varchar(191) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -700,7 +714,11 @@ CREATE TABLE `transactions` (
 --
 
 INSERT INTO `transactions` (`id`, `tst_user_id`, `tst_total_money`, `tst_name`, `tst_email`, `tst_phone`, `tst_address`, `tst_note`, `tst_status`, `tst_type`, `created_at`, `updated_at`, `tst_code`) VALUES
-(17, 10, 11010500, 'Nguyên Văn Dung', 'nguyenvandung123@gmail.com', '12345678', 'Hà nội', NULL, 2, 1, '2022-08-02 14:40:43', '2022-08-02 14:41:46', '9Xc8ijNuyWvVTaW');
+(17, 10, 11010500, 'Nguyên Văn Dung', 'nguyenvandung123@gmail.com', '12345678', 'Hà nội', NULL, 3, 1, '2022-08-02 14:40:43', '2023-02-17 13:28:38', '9Xc8ijNuyWvVTaW'),
+(18, 11, 56000, 'Truong Vi Kiet', 'vikiet1456@gmail.com', '0905448732', '05 Võ Đình Tú', NULL, 2, 1, '2023-02-17 13:31:00', '2023-02-17 13:55:00', 'Sksm2pcXbnIKqNV'),
+(19, 11, 182000, 'Truong Vi Kiet', 'vikiet1456@gmail.com', '0905448732', '05 Võ Đình Tú', NULL, 3, 1, '2023-02-17 13:40:51', '2023-04-29 14:12:47', NULL),
+(20, 3, 11010500, 'Nguyễn Văn A', 'nguyenvana@gmail.com', '0359020898', 'Hà Nội', 'ádadasdasd', 3, 1, '2023-05-02 14:52:02', '2023-05-07 07:59:48', NULL),
+(21, 3, 131750, 'Nguyễn Văn A', 'nguyenvana@gmail.com', '0359020898', 'abcxyz', NULL, 3, 1, '2023-05-07 07:47:54', '2023-05-07 07:59:41', 'TktmUpg52742cWK');
 
 -- --------------------------------------------------------
 
@@ -710,8 +728,8 @@ INSERT INTO `transactions` (`id`, `tst_user_id`, `tst_total_money`, `tst_name`, 
 
 CREATE TABLE `types` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `t_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `t_slug` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `t_name` varchar(255) DEFAULT NULL,
+  `t_slug` varchar(255) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -724,16 +742,16 @@ CREATE TABLE `types` (
 
 CREATE TABLE `users` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
-  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `phone` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `log_login` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `password` varchar(255) NOT NULL,
+  `phone` varchar(255) NOT NULL,
+  `log_login` text DEFAULT NULL,
   `count_comment` tinyint(4) NOT NULL DEFAULT 0,
-  `address` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `avatar` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `address` varchar(255) DEFAULT NULL,
+  `avatar` varchar(255) DEFAULT NULL,
+  `remember_token` varchar(100) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -743,13 +761,11 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `phone`, `log_login`, `count_comment`, `address`, `avatar`, `remember_token`, `created_at`, `updated_at`) VALUES
-(3, 'Nguyễn Văn A', 'nguyenvana@gmail.com', NULL, '$2y$10$TUYvS7G1h5zFAGXIEOznG.ceqFsbEUVgTteENFGW.bv7/Byt93QvS', '0359020898', '[{\"device\":\"WebKit\",\"platform\":\"Windows\",\"platform_ver\":\"10.0\",\"browser\":\"Chrome\",\"browser_ver\":\"89.0.4389.114\",\"time\":\"2021-04-14T15:30:08.955931Z\"},{\"device\":\"WebKit\",\"platform\":\"Windows\",\"platform_ver\":\"10.0\",\"browser\":\"Chrome\",\"browser_ver\":\"91.0.4472.124\",\"time\":\"2021-07-12T15:37:14.612766Z\"},{\"device\":\"WebKit\",\"platform\":\"Windows\",\"platform_ver\":\"10.0\",\"browser\":\"Chrome\",\"browser_ver\":\"92.0.4515.159\",\"time\":\"2021-09-01T18:32:33.812472Z\"}]', 0, NULL, NULL, NULL, '2021-04-14 15:29:39', NULL),
+(3, 'Nguyễn Văn A', 'nguyenvana@gmail.com', NULL, '$2y$10$TUYvS7G1h5zFAGXIEOznG.ceqFsbEUVgTteENFGW.bv7/Byt93QvS', '0359020898', '[{\"device\":\"WebKit\",\"platform\":\"Windows\",\"platform_ver\":\"10.0\",\"browser\":\"Chrome\",\"browser_ver\":\"89.0.4389.114\",\"time\":\"2021-04-14T15:30:08.955931Z\"},{\"device\":\"WebKit\",\"platform\":\"Windows\",\"platform_ver\":\"10.0\",\"browser\":\"Chrome\",\"browser_ver\":\"91.0.4472.124\",\"time\":\"2021-07-12T15:37:14.612766Z\"},{\"device\":\"WebKit\",\"platform\":\"Windows\",\"platform_ver\":\"10.0\",\"browser\":\"Chrome\",\"browser_ver\":\"92.0.4515.159\",\"time\":\"2021-09-01T18:32:33.812472Z\"},{\"device\":\"WebKit\",\"platform\":\"Windows\",\"platform_ver\":\"10.0\",\"browser\":\"Chrome\",\"browser_ver\":\"109.0.0.0\",\"time\":\"2023-02-15T15:50:50.716301Z\"},{\"device\":\"WebKit\",\"platform\":\"Windows\",\"platform_ver\":\"10.0\",\"browser\":\"Chrome\",\"browser_ver\":\"112.0.0.0\",\"time\":\"2023-05-02T14:42:43.506546Z\"},{\"device\":\"WebKit\",\"platform\":\"Windows\",\"platform_ver\":\"10.0\",\"browser\":\"Chrome\",\"browser_ver\":\"112.0.0.0\",\"time\":\"2023-05-06T10:00:08.049675Z\"},{\"device\":\"WebKit\",\"platform\":\"Windows\",\"platform_ver\":\"10.0\",\"browser\":\"Chrome\",\"browser_ver\":\"112.0.0.0\",\"time\":\"2023-05-06T10:00:50.111788Z\"},{\"device\":\"WebKit\",\"platform\":\"Windows\",\"platform_ver\":\"10.0\",\"browser\":\"Chrome\",\"browser_ver\":\"112.0.0.0\",\"time\":\"2023-05-07T07:47:40.017456Z\"},{\"device\":\"WebKit\",\"platform\":\"Windows\",\"platform_ver\":\"10.0\",\"browser\":\"Chrome\",\"browser_ver\":\"112.0.0.0\",\"time\":\"2023-05-07T17:48:01.566891Z\"}]', 0, NULL, NULL, NULL, '2021-04-14 15:29:39', NULL),
 (4, 'Nguyễn Văn B', 'nguyenvanb@gmail.com', NULL, '$2y$10$ZzJK8NR5UKGGgHmI5LKhFuRigDKENjflIIIsuCoPKATK9B1UUbQgq', '0928817228', NULL, 0, NULL, NULL, NULL, '2021-04-17 09:53:20', NULL),
-(6, 'Lan', 'vuonglan1998@gmail.com', NULL, '$2y$10$x.LkmigrPmRfl2JtHjR37uoz9mG5uMGz9PGVEE4hALE8zW3kopPly', '0353771333', '[{\"device\":\"WebKit\",\"platform\":\"Windows\",\"platform_ver\":\"10.0\",\"browser\":\"Chrome\",\"browser_ver\":\"91.0.4472.164\",\"time\":\"2021-07-16T13:36:25.177368Z\"},{\"device\":\"WebKit\",\"platform\":\"Windows\",\"platform_ver\":\"10.0\",\"browser\":\"Chrome\",\"browser_ver\":\"91.0.4472.164\",\"time\":\"2021-07-16T17:47:16.877135Z\"},{\"device\":\"WebKit\",\"platform\":\"Windows\",\"platform_ver\":\"10.0\",\"browser\":\"Chrome\",\"browser_ver\":\"91.0.4472.164\",\"time\":\"2021-07-17T05:35:42.652431Z\"},{\"device\":\"WebKit\",\"platform\":\"Windows\",\"platform_ver\":\"10.0\",\"browser\":\"Chrome\",\"browser_ver\":\"91.0.4472.164\",\"time\":\"2021-07-17T06:13:33.024583Z\"}]', 0, NULL, NULL, NULL, '2021-07-16 13:20:50', NULL),
-(7, 'Đồ chơi cho bé', 'dfgdfgdfgd@gmail.com', NULL, '$2y$10$Rpd64lCd4uVAP1dWYDGNJ.vIF5Zr.3EKWUf7ehD7f8hXXmeM/e5W2', '0353771885', NULL, 0, '93b nguyễn hữu thọ', NULL, NULL, '2021-07-22 14:28:39', NULL),
-(8, 'NGuyễn Văn Dược', 'duocnvoit@gmail.com', NULL, '$2y$10$MMTWnNjhwmdOWQrB80TaDOPInODPFh9jLmd3KjAPzcmY73iZkeH8q', '0298817228', NULL, 0, 'Tòa nhà Sông Đà, Đường Phạm Hùng, Phường Mễ Trì, Quận Nam Từ Liêm, Hà Nội', NULL, NULL, '2021-08-02 12:47:31', NULL),
-(9, 'NGuyễn Văn Dược', 'duocnvoit1@gmail.com', NULL, '$2y$10$..cXb48QVLu7424tON7cZuCWWWk9G9tDq5WeSk46j04mkNUzkKcwi', '0928817888', NULL, 0, 'Thôn Nội Thôn Xã Tây Đô Huyện Hưng Hà Tỉnh Thái Bình', '2021-08-04__dia-phanh-shimano-rt800-0-450x449.jpg', NULL, '2021-08-03 18:04:19', '2021-08-03 18:04:55'),
-(10, 'Nguyên Văn Dung', 'nguyenvandung123@gmail.com', NULL, '$2y$10$moZ2FBebxdX6IjyraoX4FOwPbyauYgLuPnV3o8S2Am2RDcTalSa4K', '12345678', NULL, 0, 'Hà nội', NULL, NULL, '2022-08-02 14:40:06', NULL);
+(11, 'Truong Vi Kiet', 'vikiet1456@gmail.com', NULL, '$2y$10$BNyrjwqPpKKoRMw8KhtfpOA0Yps9CoEVqynzOzcI7vwiqyO9rAzJi', '0905448732', '[{\"device\":\"WebKit\",\"platform\":\"Windows\",\"platform_ver\":\"10.0\",\"browser\":\"Chrome\",\"browser_ver\":\"112.0.0.0\",\"time\":\"2023-05-03T16:58:21.071189Z\"}]', 0, '05 Võ Đình Tú', NULL, NULL, '2023-02-17 13:26:41', NULL),
+(12, 'Tran Van Nhan', 'vannhan@gmail.com', NULL, '$2y$10$YcN0uTwt.GrfgALHO2R13.gElJql6Rb/vvsdHd/55DLDbTJbjP5Su', '0906552346', '[{\"device\":\"WebKit\",\"platform\":\"Windows\",\"platform_ver\":\"10.0\",\"browser\":\"Chrome\",\"browser_ver\":\"112.0.0.0\",\"time\":\"2023-05-03T12:28:12.599036Z\"}]', 0, 'acb', '2023-05-03__takeda-shu2.jpg', NULL, '2023-05-03 12:25:34', '2023-05-03 12:25:59'),
+(13, 'Tran Kiet', 'kiettv1108@gmail.com', NULL, '$2y$10$q/o4kS4ozjhU0o75o.sF6eOrFVWgrs1aeSoTMj96WbCw3LczESyJi', '0822312344', NULL, 0, NULL, NULL, NULL, '2023-05-03 12:38:42', NULL);
 
 -- --------------------------------------------------------
 
@@ -769,7 +785,8 @@ CREATE TABLE `user_favourite` (
 
 INSERT INTO `user_favourite` (`id`, `uf_product_id`, `uf_user_id`) VALUES
 (5, 32, 6),
-(4, 47, 4);
+(4, 47, 4),
+(6, 50, 12);
 
 --
 -- Indexes for dumped tables
@@ -976,7 +993,7 @@ ALTER TABLE `user_favourite`
 -- AUTO_INCREMENT for table `admins`
 --
 ALTER TABLE `admins`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `articles`
@@ -1048,13 +1065,13 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `payments`
 --
 ALTER TABLE `payments`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `producer`
@@ -1108,7 +1125,7 @@ ALTER TABLE `statics`
 -- AUTO_INCREMENT for table `transactions`
 --
 ALTER TABLE `transactions`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `types`
@@ -1120,13 +1137,13 @@ ALTER TABLE `types`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `user_favourite`
 --
 ALTER TABLE `user_favourite`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
